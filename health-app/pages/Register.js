@@ -1,7 +1,5 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { NavigationContainer } from '@react-navigation/native';
-
 import {
   StyleSheet,
   Text,
@@ -11,19 +9,15 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-
  
-
-const Stack = createNativeStackNavigator();
-
-
-export default function App() {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
  
   return (
+      
     <View style={styles.container}>
-      <Image style={styles.image} source={require("./assets/logo.png")} />
+      <Text>Register!</Text>
  
       <StatusBar style="auto" />
       <View style={styles.inputView}>
@@ -55,7 +49,6 @@ export default function App() {
         <Text style={styles.loginText}>Register!</Text>
       </TouchableOpacity>
     </View>
-
   );
 }
  

@@ -14,7 +14,7 @@ import {
 } from "react-native";
 
 
-function WelcomePage( {navigation}) {
+function WelcomePage({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -44,11 +44,11 @@ function WelcomePage( {navigation}) {
 
 
 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText} onPress={() => navigation.navigate('Login')}>LOGIN</Text>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.loginBtn}>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Register')}>
         <Text style={styles.loginText}>Register!</Text>
       </TouchableOpacity>
     </View>

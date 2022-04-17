@@ -3,8 +3,6 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-
 import {
   StyleSheet,
   Text,
@@ -15,19 +13,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 
- 
 
-const Stack = createNativeStackNavigator();
-
-
-export default function App() {
+function WelcomePage( {navigation}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- 
+
   return (
     <View style={styles.container}>
       <Image style={styles.image} source={require("./assets/logo.png")} />
- 
+
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
@@ -37,7 +31,7 @@ export default function App() {
           onChangeText={(email) => setEmail(email)}
         />
       </View>
- 
+
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
@@ -47,13 +41,13 @@ export default function App() {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
- 
-    
- 
+
+
+
       <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text style={styles.loginText} onPress={() => navigation.navigate('Login')}>LOGIN</Text>
       </TouchableOpacity>
-      
+
       <TouchableOpacity style={styles.loginBtn}>
         <Text style={styles.loginText}>Register!</Text>
       </TouchableOpacity>
@@ -61,7 +55,59 @@ export default function App() {
 
   );
 }
- 
+
+function HomePage() {
+  return (
+    <View>
+      <Text>Home Page</Text>
+    </View>
+  )
+}
+
+function LoginPage() {
+  return (
+    <View>
+      <Text>LogIn Page</Text>
+    </View>
+  )
+}
+
+
+function RegisterPage() {
+  return (
+    <View>
+      <Text>Register Page</Text>
+    </View>
+  )
+}
+
+const Stack = createNativeStackNavigator();
+
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Welcome"
+          component={WelcomePage}
+        />
+        <Stack.Screen
+          name="Home"
+          component={HomePage}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterPage}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -69,13 +115,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
- 
+
   image: {
     marginBottom: 40,
     width: 200,
     height: 200
   },
- 
+
   inputView: {
     borderRadius: 10,
     borderWidth: 2,
@@ -83,19 +129,19 @@ const styles = StyleSheet.create({
     width: "70%",
     height: 45,
     marginBottom: 20,
- 
+
     alignItems: "center",
   },
- 
+
   TextInput: {
     height: 50,
     flex: 1,
     padding: 10,
     marginLeft: 20,
   },
- 
-  
- 
+
+
+
   loginBtn: {
     width: "80%",
     borderRadius: 5,
@@ -107,3 +153,5 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
 });
+
+export default App;

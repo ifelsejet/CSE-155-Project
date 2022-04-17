@@ -14,7 +14,7 @@ import {
 } from "react-native";
 
 
-function WelcomePage({ navigation }) {
+function LoginPage({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -44,7 +44,7 @@ function WelcomePage({ navigation }) {
 
 
 
-      <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Login')}>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => navigation.navigate('Home')}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
 
@@ -60,14 +60,6 @@ function HomePage() {
   return (
     <View>
       <Text>Home Page</Text>
-    </View>
-  )
-}
-
-function LoginPage() {
-  return (
-    <View>
-      <Text>LogIn Page</Text>
     </View>
   )
 }
@@ -88,16 +80,12 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Welcome"
-          component={WelcomePage}
+          name="Login"
+          component={LoginPage}
         />
         <Stack.Screen
           name="Home"
           component={HomePage}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginPage}
         />
         <Stack.Screen
           name="Register"

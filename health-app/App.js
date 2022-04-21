@@ -1,98 +1,41 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
- 
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import LoginScreen from './src/pages/LoginScreen/LoginScreen';
+import HomeScreen from './src/pages/HomeScreen/HomeScreen';
+import RegistrationScreen from './src/pages/RegistrationScreen/RegistrationScreen';
+import {decode, encode} from 'base-64';
+import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
+import { authentication } from './src/firebase/config';
+
+
+const Stack = createStackNavigator();
+
 export default function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
- 
+
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(authentication, user => setUser(user));
+    return unsub;
+  }, [])
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.image} source={require("./assets/logo.png")} />
- 
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Email"
-          placeholderTextColor="#000000"
-          onChangeText={(email) => setEmail(email)}
-        />
-      </View>
- 
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="Password"
-          placeholderTextColor="#000000"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
-      </View>
- 
-    
- 
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity>
-      
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>Register!</Text>
-      </TouchableOpacity>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        { user ? (
+          <Stack.Screen name="Home">
+            {props => <HomeScreen {...props} user={user} />}
+          </Stack.Screen>
+        ) : (
+          <>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Registration" component={RegistrationScreen} /> 
+          </>
+        )}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
- 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
- 
-  image: {
-    marginBottom: 40,
-    width: 200,
-    height: 200
-  },
- 
-  inputView: {
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: "black",
-    width: "70%",
-    height: 45,
-    marginBottom: 20,
- 
-    alignItems: "center",
-  },
- 
-  TextInput: {
-    height: 50,
-    flex: 1,
-    padding: 10,
-    marginLeft: 20,
-  },
- 
-  
- 
-  loginBtn: {
-    width: "80%",
-    borderRadius: 5,
-    borderWidth: 2,
-    borderColor: 'black',
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-  },
-});

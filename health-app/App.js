@@ -1,41 +1,35 @@
-import 'react-native-gesture-handler';
-import React, { useEffect, useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import LoginScreen from './src/pages/LoginScreen/LoginScreen';
-import HomeScreen from './src/pages/HomeScreen/HomeScreen';
-import RegistrationScreen from './src/pages/RegistrationScreen/RegistrationScreen';
-import {decode, encode} from 'base-64';
-import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
-import { authentication } from './src/firebase/config';
+import React from "react";
+import { StyleSheet, StatusBar, SafeAreaView } from "react-native";
+import AppLoading from "expo-app-loading";
+import { useFonts } from "expo-font";
+import NavigationMain from "./src/config/navigation";
+let App = ({ navigation }) => {
+  let [fontsLoaded] = useFonts({
+    "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
+  });
 
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <SafeAreaView style={styles.container}>
+        <StatusBar
+          hidden={false}
+          backgroundColor={"#fff"}
+          translucent={false}
+          barStyle="dark-content"
+        />
+        <NavigationMain />
+      </SafeAreaView>
+    );
+  }
+};
 
-const Stack = createStackNavigator();
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});
 
-export default function App() {
-
-  const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const unsub = onAuthStateChanged(authentication, user => setUser(user));
-    return unsub;
-  }, [])
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        { user ? (
-          <Stack.Screen name="Home">
-            {props => <HomeScreen {...props} user={user} />}
-          </Stack.Screen>
-        ) : (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} /> 
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
+export default App;

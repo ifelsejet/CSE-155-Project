@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import firebase from '../../firebase/config';
+import {useAuth, authentication} from "../../firebase/config";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+
+
+
 import styles from './styles';
 
 export default function LoginScreen({navigation}) {
@@ -13,33 +17,19 @@ export default function LoginScreen({navigation}) {
     }
 
     const onLoginPress = () => {
-        firebase
-            .auth()
-            .signInWithEmailAndPassword(email, password)
-            .then((response) => {
-                const uid = response.user.uid
-                const usersRef = firebase.firestore().collection('users')
-                usersRef
-                    .doc(uid)
-                    .get()
-                    .then(firestoreDocument => {
-                        if (!firestoreDocument.exists) {
-                            alert("User does not exist anymore.")
-                            return;
-                        }
-                        const user = firestoreDocument.data()
-                        navigation.navigate('Home', {user})
-                    })
-                    .catch(error => {
-                        alert(error)
-                    });
-            })
-            .catch(error => {
-                alert(error)
-            })
-    }
 
+        signInWithEmailAndPassword(authentication, email, password)
+  .then((re) => {
+   console.log('Signed in')
+  })
+  .catch((error) => {
+    console.log(error)
+  });
+    }
+       
+    
     return (
+        
         <View style={styles.container}>
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}

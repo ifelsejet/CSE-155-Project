@@ -5,7 +5,7 @@ import { createUserWithEmailAndPassword,signInWithEmailAndPassword, getAuth} fro
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
 
 export default function HomeScreen(props) {
-    console.log(props.user.email);
+    console.log(props.user);
     return (
         <View>
             <Text>Home Screen</Text>

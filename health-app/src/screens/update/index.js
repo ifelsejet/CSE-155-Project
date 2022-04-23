@@ -9,7 +9,7 @@ let Update = (props) => {
   return (
     <SafeAreaView style={styles._container}>
       <BackHeader BackHandler={() => props.navigation.goBack()} />
-      <Text style={styles._heading}>Progress Update</Text>
+      <Text style={styles._heading}>Profile</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
           <Text style={styles._title_main}>Update any or all of the following</Text>
         <Text style={styles._title}>Weight:</Text>

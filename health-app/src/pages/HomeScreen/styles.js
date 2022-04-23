@@ -1,51 +1,78 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { handleSignOut } from "../../firebase/config";
-import styles from './styles';
+import { StyleSheet } from 'react-native';
 
-
-export default function HomeScreen(props) {
-    console.log(props.user.email);
-    return (
-        <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
-                keyboardShouldPersistTaps="always">
-
-                <View
-                style={{ flex: 1, width: '100%', flexDirection: "row" }}>
-                    <Text style={styles.title}>Welcome, USER!</Text>
-
-                    <TouchableOpacity
-                        style={styles.profile}
-                        onPress={() => onLoginPress()}>
-                        <Text style={styles.buttonTitle}>View Profile</Text>
-                    </TouchableOpacity>
-                </View>
-
-                <Text style={styles.info}>
-                    Some stuff about the app and the services we offer.
-                    Stuff about how to navigate the app.
-                </Text>
-                <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => onLoginPress()}>
-                        <Text style={styles.buttonTitle}>Update Progress</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>View Progress</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => handleSignOut()}>
-                    <Text style={styles.buttonTitle}>Manage Goals</Text>
-                </TouchableOpacity>
-            </KeyboardAwareScrollView>
-        </View>
-    )
-}
+export default StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    title: {
+        margin: 16,
+        fontSize: 30,
+        alignSelf: "flex-start",
+    },
+    logo: {
+        flex: 1,
+        height: 120,
+        width: 90,
+        alignSelf: "center",
+        margin: 30
+    },
+    info: {
+        flex: 1,
+        alignSelf: "center",
+        margin: 24,
+        textAlign: "center",
+    },
+    input: {
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 30,
+        marginRight: 30,
+        paddingLeft: 16
+    },
+    button: {
+        //backgroundColor: '#788eec',
+        marginLeft: 60,
+        marginRight: 60,
+        marginTop: 20,
+        height: 80,
+        borderRadius: 5,
+        borderWidth: 2,
+        alignItems: "center",
+        justifyContent: 'center'
+    },
+    profile: {
+        //backgroundColor: '#788eec',
+        margin: 16,
+        height: 80,
+        width: 80,
+        borderWidth: 2,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: 'center',
+    },
+    buttonTitle: {
+        color: 'black',
+        fontSize: 16,
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    footerView: {
+        flex: 1,
+        alignItems: "center",
+        marginTop: 20
+    },
+    footerText: {
+        fontSize: 16,
+        color: '#2e2e2d'
+    },
+    footerLink: {
+        color: "#788eec",
+        fontWeight: "bold",
+        fontSize: 16
+    }
+})

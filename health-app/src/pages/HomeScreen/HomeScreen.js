@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { handleSignOut } from "../../firebase/config";
 import styles from './styles';
@@ -14,14 +14,16 @@ export default function HomeScreen(props) {
                 keyboardShouldPersistTaps="always">
 
                 <View
-                style={{ flex: 1, width: '100%', flexDirection: "row" }}>
+                style={{ flex: 1,  width: '100%', flexDirection: "row" }}>
                     <Text style={styles.title}>Welcome, USER!</Text>
 
                     <TouchableOpacity
-                        style={styles.profile}
-                        onPress={() => onLoginPress()}>
-                        <Text style={styles.buttonTitle}>View Profile</Text>
-                    </TouchableOpacity>
+                    onPress={() => onLoginPress()}>
+                        <Image
+                            style={styles.profile}
+                            source={require('../../../assets/profile.png')}
+                        />
+                  </TouchableOpacity>
                 </View>
 
                 <Text style={styles.info}>

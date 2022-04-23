@@ -50,10 +50,8 @@ export default StyleSheet.create({
         margin: 16,
         height: 80,
         width: 80,
-        borderWidth: 2,
         borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center',
+        alignSelf: "flex-end",
     },
     buttonTitle: {
         color: 'black',

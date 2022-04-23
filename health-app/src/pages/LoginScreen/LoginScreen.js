@@ -12,7 +12,7 @@ export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const onFooterLinkPress = () => {
+    const onRegistrationPress = () => {
         navigation.navigate('Registration')
     }
 
@@ -60,9 +60,12 @@ export default function LoginScreen({navigation}) {
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
-                </View>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => onRegistrationPress()}>
+                    <Text style={styles.buttonTitle}>Register a New Account</Text>
+                </TouchableOpacity>
+                
             </KeyboardAwareScrollView>
         </View>
     )

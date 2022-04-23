@@ -14,7 +14,8 @@ export default function RegistrationScreen({navigation}) {
     const [confirmPassword, setConfirmPassword] = useState('')
 
     const onFooterLinkPress = () => {
-        navigation.navigate('Login')
+        navigation.goBack();
+        //navigation.navigate('Login')
     }
     //call handleSignOut on button press to sign out
 
@@ -56,10 +57,7 @@ export default function RegistrationScreen({navigation}) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                <Image
-                    style={styles.logo}
-                    source={require('../../../assets/icon.png')}
-                />
+               <Text style={styles.heading}> Register</Text>
                 <TextInput
                     style={styles.input}
                     placeholder='Full Name'
@@ -104,7 +102,7 @@ export default function RegistrationScreen({navigation}) {
                     <Text style={styles.buttonTitle}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in</Text></Text>
+                    <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in!</Text></Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>

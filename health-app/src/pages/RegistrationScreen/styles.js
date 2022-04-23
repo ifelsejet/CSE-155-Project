@@ -3,10 +3,15 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        backgroundColor: "#fff",
+        paddingHorizontal: 20,
     },
-    title: {
-
+    heading: {
+        color: "#000",
+        fontSize: 36,
+        fontFamily: "Comfortaa-Regular",
+        marginTop: 10,
+        marginBottom: 20,
     },
     logo: {
         flex: 1,

@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Login, Register, PersonalInformation,Progess,Update } from "./../../screens";
 import {authentication} from "../../../src/firebase/config";
 import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
+import HomeScreen from "../../pages/HomeScreen/HomeScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +27,13 @@ let NavigationMain = () => {
           component={Register}
           options={{ headerShown: false }}
         />
+          <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ headerShown: false }}>
+            
+          </Stack.Screen>
+        
         <Stack.Screen
           name="PersonalInformation"
           component={PersonalInformation}

@@ -20,7 +20,8 @@ export default function LoginScreen({navigation}) {
 
         signInWithEmailAndPassword(authentication, email, password)
   .then((re) => {
-   console.log('Signed in')
+   console.log('Signed in');
+   navigation.navigate('Home');
   })
   .catch((error) => {
     console.log(error)

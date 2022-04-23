@@ -5,10 +5,11 @@ import { createUserWithEmailAndPassword,signInWithEmailAndPassword, getAuth} fro
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
 
 export default function HomeScreen(props) {
+    //console.log(props);
     console.log(props.user);
     return (
         <View>
-            <Text>Home Screen</Text>
+            <Text>Home Screen!</Text>
             <TouchableOpacity
                     onPress={() => handleSignOut()}>
                     <Text>Sign Out</Text>

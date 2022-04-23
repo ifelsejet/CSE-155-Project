@@ -13,7 +13,10 @@ let Login = (props) => {
 
     signInWithEmailAndPassword(authentication, email, password)
       .then((re) => {
-      console.log('Signed in')
+      console.log('Signed in');
+      props.navigation.navigate('Home');
+      console.log('Navigated');
+
       })
       .catch((error) => {
       console.log(error)

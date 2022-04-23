@@ -1,9 +1,25 @@
 import React, { useState } from "react";
 import { SafeAreaView, Text, StyleSheet, ScrollView, View } from "react-native";
+import {useAuth, authentication} from "../../../src/firebase/config";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { Input, Button } from "./../../components";
+
+
 let Login = (props) => {
-  let [email, setEmail] = useState("johndoe@example.com");
-  let [password, setPassword] = useState("544564565");
+  let [email, setEmail] = useState('');
+  let [password, setPassword] = useState('');
+
+  const onLoginPress = () => {
+
+    signInWithEmailAndPassword(authentication, email, password)
+      .then((re) => {
+      console.log('Signed in')
+      })
+      .catch((error) => {
+      console.log(error)
+      });
+}
+
   return (
     <SafeAreaView style={styles._container}>
       <Text style={styles._heading}>Log in</Text>
@@ -17,12 +33,12 @@ let Login = (props) => {
         <Input
           placeholder="Password"
           value={password}
-          onChangeText={(password) => setPassword(email)}
+          onChangeText={(password) => setPassword(password)}
           secureTextEntry={true}
         />
         <Button
           ButtonText="Log in"
-          onPress={() => props.navigation.navigate("Progess")}
+          onPress={() => onLoginPress()}
         />
         <Button
           ButtonText="Register a New account"

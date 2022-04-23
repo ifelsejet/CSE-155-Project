@@ -23,7 +23,7 @@ let NavigationMain = () => {
           options={{ headerShown: false }}
         />
          <Stack.Screen
-          name="Progess"
+          name="Progress"
           component={Progess}
           options={{ headerShown: false }}
         />

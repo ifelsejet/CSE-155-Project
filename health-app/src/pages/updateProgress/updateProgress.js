@@ -3,26 +3,29 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {useAuth, authentication} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { AntDesign } from "@expo/vector-icons";
 
 
 
 import styles from './styles';
 
-export default function UpdateProgress({navigation}) {
-    
+
+export default function UpdateProgress(props) {
+    let [weight, setWeight] = useState("");
+    let [age, setAge] = useState("");
+    let [height, setHeight] = useState("");
+    let [fitness, setFitness] = useState("");
+    console.log("Built differently");
+    console.log(props);
        
 
     return (
-        
-        <View >
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
-                keyboardShouldPersistTaps="always">
-            <Text>Update Progress</Text>
-            <Text>Update Progress</Text>
-            <Text>Update Progress</Text>
-
-            </KeyboardAwareScrollView>
-        </View>
-    )
+        <View style={styles.container}>
+        <TouchableOpacity style={styles._back} onPress={props.BackHandler}>
+      <AntDesign name="back" size={24} color="black" />
+        </TouchableOpacity>
+       
+    </View>
+  );
+    
 }

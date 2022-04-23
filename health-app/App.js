@@ -11,6 +11,7 @@ import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
 import { authentication } from './src/firebase/config';
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
+import ViewProgress from './src/pages/viewProgress/ViewProgress';
 
 /*
 let [fontsLoaded] = useFonts({
@@ -42,10 +43,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        { user ? (
+        { user ? (<>
           <Stack.Screen name="Home" options={{ headerShown: false }}>
             {props => <HomeScreen {...props} user={user} />}
           </Stack.Screen>
+          <Stack.Screen name="Update" component={UpdateProgress} options={{ headerShown: false }}/> 
+          {props => <UpdateProgress {...props} user={user} />}
+          <Stack.Screen name="View" component={ViewProgress} options={{ headerShown: false }}/> 
+          {props => <ViewProgress {...props} user={user} />}
+          </>
           
         ) 
         
@@ -54,7 +60,6 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
  />
             <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }}/> 
-            <Stack.Screen name="Update" component={UpdateProgress} options={{ headerShown: false }}/> 
 
           </>
         )}

@@ -23,11 +23,12 @@ const Stack = createStackNavigator();
 
 
 export default function HomeScreen(props) {
-    const navigation = useNavigation();
+    //const navigation = useNavigation();
 
     //console.log(props.user.email);
     console.log(props.user);
-    console.log(props.navigation);
+    console.log("AHHHHHH");
+    console.log(props);
     return (
         <View style={styles.container}>
         <KeyboardAwareScrollView
@@ -51,13 +52,13 @@ export default function HomeScreen(props) {
             </Text>
             <TouchableOpacity
                     style={styles.button}
-                    onPress={() => onLoginPress()}>
+                    onPress={() => props.navigation.navigate('Update')}>
                     <Text style={styles.buttonTitle}>Update Progress</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => navigation.navigate('UpdateProgress')}>
+                onPress={() => props.navigation.navigate('View')}>
                 <Text style={styles.buttonTitle}>View Progress</Text>
             </TouchableOpacity>
 

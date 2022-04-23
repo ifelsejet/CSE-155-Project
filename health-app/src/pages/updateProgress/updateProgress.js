@@ -21,9 +21,11 @@ export default function UpdateProgress(props) {
 
     return (
         <View style={styles.container}>
-        <TouchableOpacity style={styles._back} onPress={props.BackHandler}>
+        <TouchableOpacity style={styles._back} onPress={() => props.navigation.goBack()}>
       <AntDesign name="back" size={24} color="black" />
         </TouchableOpacity>
+
+        <Text> Update Progress</Text>
        
     </View>
   );

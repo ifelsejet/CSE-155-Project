@@ -12,7 +12,7 @@ export default StyleSheet.create({
         // borderRadius: 50 / 2,
         // alignItems: "center",
         // justifyContent: "center",
-        marginTop: 20,
+        marginTop: 40,
       },
       _heading: {
         color: "#000",

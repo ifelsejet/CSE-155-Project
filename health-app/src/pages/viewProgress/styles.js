@@ -16,22 +16,41 @@ export default StyleSheet.create({
       },
       _heading: {
         color: "#000",
-        fontSize: 25,
+        fontSize: 36,
         fontFamily: "Comfortaa-Regular",
         marginTop: 10,
         marginBottom: 20,
       },
-      _title: {
-        color: "#000",
-        fontSize: 15,
-        fontFamily: "Comfortaa-Regular",
-        marginBottom: -10,
-        marginTop: 10,
+      _progess_heading_main: {
+        backgroundColor: "#C4C4C4",
+        height: 50,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        justifyContent: "center",
       },
-      _title_main:{
-        color: "#000",
-        fontSize: 15,
+      _btn: {
+        backgroundColor: "#000",
+        height: 50,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+        marginTop: 20,
+      },
+      _btn_text: {
+        color: "#fff",
+        fontSize: 14,
         fontFamily: "Comfortaa-Regular",
-        marginTop: 10,
-      }
+        textTransform: "uppercase",
+        fontWeight: "bold",
+      },
+      _progess_heading: {
+        color: "#000",
+        fontSize: 20,
+        fontFamily: "Comfortaa-Regular",
+        fontWeight: "bold",
+      },
+      _chart: {
+        marginTop: 20,
+      },
 })

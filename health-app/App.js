@@ -9,14 +9,22 @@ import {decode, encode} from 'base-64';
 import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
 import { authentication } from './src/firebase/config';
 import { useFonts } from "expo-font";
+import AppLoading from "expo-app-loading";
+
+/*
 let [fontsLoaded] = useFonts({
   "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
 });
+*/
 
 
 const Stack = createStackNavigator();
 
 export default function App() {
+  let [fontsLoaded] = useFonts({
+    "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
+  });
+
 
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -25,7 +33,11 @@ export default function App() {
     const unsub = onAuthStateChanged(authentication, user => setUser(user));
     return unsub;
   }, [])
-
+  
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } 
+  else {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -44,3 +56,4 @@ export default function App() {
     </NavigationContainer>
   );
 }
+};

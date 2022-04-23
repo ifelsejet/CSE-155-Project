@@ -14,7 +14,7 @@ export default function HomeScreen(props) {
                 keyboardShouldPersistTaps="always">
 
                 <View
-                style={{ flex: 1,  width: '100%', flexDirection: "row" }}>
+                style={{ flex: 1,  width: '100%', flexDirection: "row", justifyContent: 'space-between' }}>
                     <Text style={styles.title}>Welcome, USER!</Text>
 
                     <TouchableOpacity

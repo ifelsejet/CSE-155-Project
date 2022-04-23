@@ -8,6 +8,10 @@ import RegistrationScreen from './src/pages/RegistrationScreen/RegistrationScree
 import {decode, encode} from 'base-64';
 import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
 import { authentication } from './src/firebase/config';
+import { useFonts } from "expo-font";
+let [fontsLoaded] = useFonts({
+  "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
+});
 
 
 const Stack = createStackNavigator();
@@ -26,13 +30,14 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         { user ? (
-          <Stack.Screen name="Home">
+          <Stack.Screen name="Home" options={{ headerShown: false }}>
             {props => <HomeScreen {...props} user={user} />}
           </Stack.Screen>
         ) : (
           <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} /> 
+            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
+ />
+            <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }}/> 
           </>
         )}
       </Stack.Navigator>

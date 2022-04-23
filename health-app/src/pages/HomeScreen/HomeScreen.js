@@ -5,22 +5,29 @@ import {db, authentication, handleSignOut} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword, getAuth} from "firebase/auth";
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
 import { createStackNavigator } from '@react-navigation/stack'
-import Update from '../updateProgress/updateProgress';
+import UpdateProgress from '../updateProgress/UpdateProgress';
+import { useNavigation } from '@react-navigation/native';
+
 
 import styles from './styles';
 
 
 const onViewProgressPress = () => {
     console.log("Pressed!");
-    //props.navigation.navigate('Update');
+    navigation.navigate('Update');
 }
 
 const Stack = createStackNavigator();
+//const navigation = useNavigation();
+
 
 
 export default function HomeScreen(props) {
+    const navigation = useNavigation();
+
     //console.log(props.user.email);
     console.log(props.user);
+    console.log(props.navigation);
     return (
         <View style={styles.container}>
         <KeyboardAwareScrollView
@@ -33,7 +40,7 @@ export default function HomeScreen(props) {
 
                 <TouchableOpacity
                     style={styles.profile}
-                    onPress={() => onLoginPress()}>
+                    onPress={() => handleSignOut()}>
                     <Text style={styles.buttonTitle}>View Profile</Text>
                 </TouchableOpacity>
             </View>
@@ -50,7 +57,7 @@ export default function HomeScreen(props) {
 
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => props.navigaton.navigate('Update')}>
+                onPress={() => navigation.navigate('UpdateProgress')}>
                 <Text style={styles.buttonTitle}>View Progress</Text>
             </TouchableOpacity>
 

@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import LoginScreen from './src/pages/LoginScreen/LoginScreen';
 import HomeScreen from './src/pages/HomeScreen/HomeScreen';
+import UpdateProgress from './src/pages/updateProgress/UpdateProgress';
 import RegistrationScreen from './src/pages/RegistrationScreen/RegistrationScreen';
 import {decode, encode} from 'base-64';
 import {getAuth, onAuthStateChanged,signOut} from "firebase/auth";
@@ -53,6 +54,8 @@ export default function App() {
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
  />
             <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }}/> 
+            <Stack.Screen name="Update" component={UpdateProgress} options={{ headerShown: false }}/> 
+
           </>
         )}
       </Stack.Navigator>

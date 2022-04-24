@@ -1,25 +1,10 @@
 import React from 'react';
 import { LineChart } from 'react-native-line-chart'
 import {Dimensions} from "react-native"
-let Chart = ()=>{
+let Chart = (props)=>{
     return(
 <LineChart
-    data={{
-      labels: [""],
-      datasets: [{
-        data: [
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100,
-          Math.random() * 100
-        ]
-      }]
-    }}
+    data={props.datainput}
     width={Dimensions.get('window').width} // from react-native
     height={220}
     chartConfig={{

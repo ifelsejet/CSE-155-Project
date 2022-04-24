@@ -25,10 +25,7 @@ const Stack = createStackNavigator();
 export default function HomeScreen(props) {
     //const navigation = useNavigation();
 
-    //console.log(props.user.email);
-    console.log(props.user,email);
-    console.log("AHHHHHH");
-    console.log(props);
+    
     return (
         <View style={styles.container}>
         <KeyboardAwareScrollView

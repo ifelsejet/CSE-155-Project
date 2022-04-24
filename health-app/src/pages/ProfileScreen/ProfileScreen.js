@@ -16,8 +16,8 @@ export default function ProfileScreen(props) {
     let [height, setHeight] = useState("");
     let [fitness, setFitness] = useState("");
     console.log("Built differently");
-    console.log(props);
-       
+   
+      
 
     return (
         <View style={styles.container}>

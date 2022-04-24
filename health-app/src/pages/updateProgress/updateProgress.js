@@ -16,7 +16,7 @@ export default function UpdateProgress(props) {
     let [height, setHeight] = useState("");
     let [fitness, setFitness] = useState("");
     console.log("Built differently");
-    console.log(props);
+    console.log(props.user.uid);
        
 
     return (

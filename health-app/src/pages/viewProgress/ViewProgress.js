@@ -14,7 +14,7 @@ import styles from './styles';
 
 export default function ViewProgress(props) {
     console.log("Inside View");
-    console.log(props);
+    console.log(props.user.uid);
        
 
     return (

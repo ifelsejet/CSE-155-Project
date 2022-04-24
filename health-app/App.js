@@ -13,7 +13,8 @@ import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import ViewProgress from './src/pages/viewProgress/ViewProgress';
 import ProfileScreen from './src/pages/ProfileScreen/ProfileScreen';
-
+import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
+import {db} from "../health-app/src/firebase/config"
 /*
 let [fontsLoaded] = useFonts({
   "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
@@ -33,7 +34,12 @@ export default function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(authentication, user => setUser(user));
+    const unsub = onAuthStateChanged(authentication, user => {
+      const categoryCol = collection(db,'users');
+     const snap = getDoc(doc(categoryCol, ))
+     console.log(snap.data())
+     setUser(snap.data())
+    });
     return unsub;
   }, [])
   
@@ -48,12 +54,15 @@ export default function App() {
           <Stack.Screen name="Home" options={{ headerShown: false }}>
             {props => <HomeScreen {...props} user={user} />}
           </Stack.Screen>
-          <Stack.Screen name="Update" component={UpdateProgress} options={{ headerShown: false }}/> 
-          {props => <UpdateProgress {...props} user={user} />}
-          <Stack.Screen name="View" component={ViewProgress} options={{ headerShown: false }}/> 
-          {props => <ViewProgress {...props} user={user} />}
-          <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/> 
-          {props => <ViewProgress {...props} user={user} />}
+          <Stack.Screen name="Profile" options={{ headerShown: false }}>
+            {props => <ProfileScreen {...props} user={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="View" options={{ headerShown: false }}>
+            {props => <ViewProgress {...props} user={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="Update" options={{ headerShown: false }}>
+            {props => <UpdateProgress {...props} user={user} />}
+          </Stack.Screen>
           </>
           
         ) 

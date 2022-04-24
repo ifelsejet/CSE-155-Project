@@ -4,7 +4,6 @@ import {useAuth, authentication} from "../../../src/firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { Input, Button } from "./../../components";
 
-
 let Login = (props) => {
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
@@ -14,7 +13,7 @@ let Login = (props) => {
     signInWithEmailAndPassword(authentication, email, password)
       .then((re) => {
       console.log('Signed in');
-      props.navigation.navigate('Home');
+      props.navigation.navigate('ManageGoals');
       console.log('Navigated');
 
       })

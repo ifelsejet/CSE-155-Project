@@ -69,6 +69,10 @@ export default function ViewProgress(props) {
    <TouchableOpacity style={styles._btn} onPress={() => props.navigation.navigate('Update')}>
       <Text style={styles._btn_text}> Update/Add Progress </Text>
     </TouchableOpacity>
+
+    <TouchableOpacity style={styles._btn} onPress={() => console.log(props.user)}>
+      <Text style={styles._btn_text}> Props Test </Text>
+    </TouchableOpacity>
    <View style={{ paddingBottom: 20 }} />
    </ScrollView>
    </View>

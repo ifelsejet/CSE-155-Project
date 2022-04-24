@@ -26,6 +26,8 @@ export default function UpdateProgress(props) {
         </TouchableOpacity>
 
         <Text> Update Progress</Text>
+
+       
        
     </View>
   );

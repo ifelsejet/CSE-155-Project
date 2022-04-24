@@ -12,6 +12,7 @@ import { authentication } from './src/firebase/config';
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
 import ViewProgress from './src/pages/viewProgress/ViewProgress';
+import ProfileScreen from './src/pages/ProfileScreen/ProfileScreen';
 
 /*
 let [fontsLoaded] = useFonts({
@@ -50,6 +51,8 @@ export default function App() {
           <Stack.Screen name="Update" component={UpdateProgress} options={{ headerShown: false }}/> 
           {props => <UpdateProgress {...props} user={user} />}
           <Stack.Screen name="View" component={ViewProgress} options={{ headerShown: false }}/> 
+          {props => <ViewProgress {...props} user={user} />}
+          <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }}/> 
           {props => <ViewProgress {...props} user={user} />}
           </>
           

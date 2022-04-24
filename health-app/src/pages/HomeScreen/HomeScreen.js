@@ -41,7 +41,7 @@ export default function HomeScreen(props) {
 
                 <TouchableOpacity
                     style={styles.profile}
-                    onPress={() => handleSignOut()}>
+                    onPress={() => props.navigation.navigate('Profile')}>
                     <Text style={styles.buttonTitle}>View Profile</Text>
                 </TouchableOpacity>
             </View>

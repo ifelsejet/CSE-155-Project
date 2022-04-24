@@ -6,6 +6,31 @@ export default StyleSheet.create({
         backgroundColor: "#fff",
         paddingHorizontal: 20,
       },
+      input: {
+        borderWidth: 1.5,
+        borderColor: "#000",
+        marginTop: 20,
+        height: 50,
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        color: "#000",
+        fontFamily: "Comfortaa-Regular",
+        fontSize: 16,
+        flex: 1,
+
+        
+        /*
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'white',
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 30,
+        marginRight: 30,
+        paddingLeft: 16
+        */
+    },
       _back: {
         // width: 50,
         // height: 50,
@@ -44,37 +69,6 @@ export default StyleSheet.create({
         marginBottom: -10,
         marginTop: 10,
       },
-      button: {
-        backgroundColor: "#000",
-        height: 50,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "row",
-        marginTop: 20,
-        /*
-        backgroundColor: '#788eec',
-        marginLeft: 30,
-        marginRight: 30,
-        marginTop: 20,
-        height: 48,
-        borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center'
-        */
-    },
-    buttonTitle: {
-        color: "#fff",
-        fontSize: 14,
-        fontFamily: "Comfortaa-Regular",
-        textTransform: "uppercase",
-        fontWeight: "bold",
-        /*
-        color: 'white',
-        fontSize: 16,
-        fontWeight: "bold"
-        */
-    },
       _title_main:{
         color: "#000",
         fontSize: 15,

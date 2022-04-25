@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ScrollView, Image, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native'
+import { ScrollView, Modal, Image, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {useAuth, authentication} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
@@ -11,22 +11,24 @@ import styles from './styles';
 
 
 
-export default function UpdateProgress(props) {
+export default function ManageGoals(props) {
     const showAlert = () =>  
     Alert.alert(  
-        'Update Progress',  
-        'Progress was successfuly updated!',  
+        'Manage Goals',  
+        'Goals were successfuly updated!',  
         [  
             
-            {text: 'OK', onPress: () => props.navigation.navigate('View')},  
+            {text: 'OK', onPress: () => props.navigation.navigate('Home')},  
         ]  
     );  
 
     let [name, setName] = useState("");
     let [weight, setWeight] = useState("");
     let [age, setAge] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
 
-    console.log("Built differently");
+
+    console.log("Built differently!");
     console.log(props.user.uid);
        
 
@@ -36,8 +38,8 @@ export default function UpdateProgress(props) {
       <AntDesign name="back" size={24} color="black" />
         </TouchableOpacity>
 
-        <Text style={styles._heading}>Update Progress</Text>
-        <Text style={styles._subheading}>Update any or all of the following progress for today.</Text>
+        <Text style={styles._heading}>Manage Goals</Text>
+        <Text style={styles._subheading}>Below you can view your current daily goals. {"\n"}Update the daily goals as you wish.</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles._title}>Push Ups!:</Text>
         <View style={styles._input_main}>
@@ -72,9 +74,36 @@ export default function UpdateProgress(props) {
                 secureTextEntry={false}
             />
             </View>
-        
+         <View style={styles._leftButton}>
+            <TouchableOpacity style={styles._btn} onPress={() => setModalVisible(!modalVisible)}>
+            <Text style={styles._btn_text}> Add a New Goal </Text>
+            </TouchableOpacity>
+        </View>
+        <View style={styles._centered_view}>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalVisible}
+                        onRequestClose={() => {
+                            Alert.alert("Modal has been closed.");
+                            setModalVisible(!modalVisible);
+                        }}
+                    >
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Goal Title:</Text>
+                            <View style={{borderColor:'black', borderWidth: 1}}>
+                            <TextInput
+                         placeholder=""
+                            />
+                            </View>
+                            <TouchableOpacity style={styles._btn} onPress={() => setModalVisible(!modalVisible)}>
+                            <Text style={styles._btn_text}> Save New Goal! </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </Modal>
+                </View>
         <TouchableOpacity style={styles._btn} onPress={() =>  showAlert()}>
-            <Text style={styles._btn_text}> Update and View Progress </Text>
+            <Text style={styles._btn_text}> Update Goals </Text>
         </TouchableOpacity>
         <View style={{ paddingBottom: 20 }} />
 

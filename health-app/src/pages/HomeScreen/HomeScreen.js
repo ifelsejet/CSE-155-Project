@@ -65,8 +65,9 @@ export default function HomeScreen(props) {
 
             <TouchableOpacity
                 style={styles.button}
+                onPress={() => props.navigation.navigate('Manage')}
                 >
-                <Text style={styles.buttonTitle}>Manage Goals!</Text>
+                <Text style={styles.buttonTitle}>Manage Goals</Text>
                
             </TouchableOpacity>
         </KeyboardAwareScrollView>

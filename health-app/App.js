@@ -15,6 +15,7 @@ import ViewProgress from './src/pages/viewProgress/ViewProgress';
 import ProfileScreen from './src/pages/ProfileScreen/ProfileScreen';
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
 import {db} from "../health-app/src/firebase/config"
+import ManageGoals from './src/pages/ManageGoals/ManageGoals';
 /*
 let [fontsLoaded] = useFonts({
   "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
@@ -77,6 +78,9 @@ export default function App() {
           </Stack.Screen>
           <Stack.Screen name="Update" options={{ headerShown: false }}>
             {props => <UpdateProgress {...props} user={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="Manage" options={{ headerShown: false }}>
+            {props => <ManageGoals {...props} user={user} />}
           </Stack.Screen>
           </>
           

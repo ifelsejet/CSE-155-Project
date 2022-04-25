@@ -14,6 +14,22 @@ export default StyleSheet.create({
         // justifyContent: "center",
         marginTop: 40,
       },
+      _subheading: {
+        color: '#000',
+        fontFamily: 'Comfortaa-Regular',
+        fontSize: 13,
+    },
+    _leftButton: {
+        width: 85,
+        height: 80,
+    },
+    _title: {
+        color: "#000",
+        fontSize: 15,
+        fontFamily: "Comfortaa-Regular",
+        marginBottom: -50,
+        marginTop: 50,
+    },
       _btn: {
         backgroundColor: "#000",
         height: 50,
@@ -32,7 +48,7 @@ export default StyleSheet.create({
       },
       _heading: {
         color: "#000",
-        fontSize: 25,
+        fontSize: 23,
         fontFamily: "Comfortaa-Regular",
         marginTop: 10,
         marginBottom: 20,
@@ -63,6 +79,22 @@ export default StyleSheet.create({
         justifyContent: 'center'
         */
     },
+    _input_main: {
+      borderWidth: 1.5,
+      borderColor: "#000",
+      marginTop: 20,
+      marginLeft: 80,
+      height: 50,
+      width: 50,
+      paddingHorizontal: 10,
+      borderRadius: 5,
+  },
+  _textinput: {
+      color: "#000",
+      fontFamily: "Comfortaa-Regular",
+      fontSize: 16,
+      flex: 1,
+  },
     buttonTitle: {
         color: "#fff",
         fontSize: 14,

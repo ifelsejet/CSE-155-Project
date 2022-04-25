@@ -53,4 +53,18 @@ export default StyleSheet.create({
       _chart: {
         marginTop: 20,
       },
+      
+      pickerSelectStyles: {
+            fontSize: 20,
+            fontFamily: "Comfortaa-Regular",
+            fontWeight: "bold",
+            paddingVertical: 12,
+            paddingHorizontal: 10,
+            borderWidth: 0,
+            borderColor: 'gray',
+            borderRadius: 4,
+            color: 'black',
+            paddingRight: 30 // to ensure the text is never behind the icon
+        },
+      
 })

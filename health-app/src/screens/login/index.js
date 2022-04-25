@@ -13,7 +13,7 @@ let Login = (props) => {
     signInWithEmailAndPassword(authentication, email, password)
       .then((re) => {
       console.log('Signed in');
-      props.navigation.navigate('ManageGoals');
+      props.navigation.navigate('Progress');
       console.log('Navigated');
 
       })

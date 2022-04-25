@@ -35,10 +35,25 @@ export default function App() {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(authentication, user => {
-      const categoryCol = collection(db,'users');
-     const snap = getDoc(doc(categoryCol, ))
-     console.log(snap.data())
-     setUser(snap.data())
+     // const docRef = collection(doc(db, "users"));
+     // const docSnap = getDoc(docRef);
+      /*
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+      } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }  
+
+    setUser(docSnap.data());  
+    */
+    
+    const userCol = collection(db,'users');
+    const snap =  getDoc(doc(userCol,user.uid));
+    // console.log(snap.data());
+     //setUser(snap.data());
+     setUser(user);
+     
     });
     return unsub;
   }, [])

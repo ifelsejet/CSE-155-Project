@@ -1,18 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {useAuth, authentication} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { AntDesign } from "@expo/vector-icons";
 import { LineChart } from 'react-native-line-chart'
+import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
+    waitForPendingWrites, where, query
+} from "firebase/firestore";
 import {Dimensions} from "react-native"
-
-
 
 import styles from './styles';
 
 
+ 
 export default function ViewProgress(props) {
+
     console.log("Inside View");
     console.log(props.user.uid);
        
@@ -70,9 +73,7 @@ export default function ViewProgress(props) {
       <Text style={styles._btn_text}> Update/Add Progress </Text>
     </TouchableOpacity>
 
-    <TouchableOpacity style={styles._btn} onPress={() => console.log(props.user)}>
-      <Text style={styles._btn_text}> Props Test </Text>
-    </TouchableOpacity>
+    
    <View style={{ paddingBottom: 20 }} />
    </ScrollView>
    </View>

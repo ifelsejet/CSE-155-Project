@@ -8,7 +8,6 @@ export default StyleSheet.create({
     title: {
         margin: 16,
         fontSize: 30,
-        alignSelf: "flex-start",
     },
     logo: {
         flex: 1,
@@ -48,12 +47,9 @@ export default StyleSheet.create({
     profile: {
         //backgroundColor: '#788eec',
         margin: 16,
-        height: 80,
-        width: 80,
-        borderWidth: 2,
+        height: 64,
+        width: 64,
         borderRadius: 5,
-        alignItems: "center",
-        justifyContent: 'center',
     },
     buttonTitle: {
         color: 'black',

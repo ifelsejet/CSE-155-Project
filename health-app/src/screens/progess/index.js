@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { SafeAreaView, Text, StyleSheet, ScrollView, View } from "react-native";
+import { SafeAreaView, Text, StyleSheet, ScrollView, View} from "react-native";
+import RNPickerSelect from 'react-native-picker-select';
 import { Button, BackHeader, Chart } from "./../../components";
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
         waitForPendingWrites, where, query
@@ -7,34 +8,84 @@ import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
 import {db} from "../../firebase/config";
 
 let Progess = (props) => {
-  var docData;
+
+  var docData = {};
   var data;
-  var [weight, setWeight] = useState([0]);
-  var [weightDates, setWeightDates] = useState([0]);
+  var [achievedData, setAchievedData] = useState([0]);
+  var [chartDates, setCharttDates] = useState([0]);
+  var [goalData, setGoalData] = useState([0]);
+  const [selectedProgressType, setSelectedProgressType] = useState("weight");
+  const [progressTypes, setProgressTypes] = useState([
+      { label: 'Weight Progress', value: 'weight' },
+  ]);
+  
+
+  function getChartData(){
+    if(Object.keys(docData).length == 0 || selectedProgressType == null)
+      return
+    var dataKeys = Object.keys(docData["data"][selectedProgressType])
+    var goalKeys = Object.keys(docData["Goals"][selectedProgressType])
+    var mergedDates = [...new Set([...dataKeys, ...goalKeys])];
+    mergedDates.sort();
+    
+    var achievedValues = [0];
+    var goalValues = [0];
+    mergedDates.forEach((day, index) => {
+      if(day in docData["data"][selectedProgressType]){
+        achievedValues.push(docData["data"][selectedProgressType][day])
+      }
+      else{
+        achievedValues.push(achievedValues.slice(-1))
+      }
+
+      if(day in docData["Goals"][selectedProgressType]){
+        goalValues.push(docData["Goals"][selectedProgressType][day])
+      }
+      else{
+        goalValues.push(goalValues.slice(-1))
+      }
+    })
+    mergedDates.forEach(function(part, index) {
+      this[index] = new Date(this[index]);
+      this[index] = this[index].getDate();
+    }, mergedDates); // use arr as this
+    achievedValues.shift()
+    goalValues.shift()
+    setAchievedData(achievedValues)
+    setGoalData(goalValues)
+    setCharttDates(mergedDates)
+  }
 
   useEffect(() => {
     const docRef = doc(db,'users', "1VKT54jAuaTOzxbqOWIebmwryAD3");
     getDoc(docRef)
       .then((doc) => {
         docData = doc.data()
-        var tempValues = Object.values(docData["data"]["weight"])
-        var tempKeys = Object.keys(docData["data"]["weight"])
-        var indices = Array.from(tempKeys.keys())
-                     .sort( (a,b) => tempKeys[a].localeCompare(tempKeys[b]) ),
-        tempValues = indices.map(i => tempValues[i]),
-        tempKeys = indices.map(i => tempKeys[i])
-        tempKeys.forEach(function(part, index) {
-          this[index] = new Date(this[index]);
-          this[index] = this[index].getDay();
-        }, tempKeys); // use arr as this
-        setWeight(tempValues)
-        setWeightDates(tempKeys)
+        var goalList = Object.keys(docData["Goals"])
+        var goalList = [...new Set([...goalList, "weight"])];
+        var goalListFormatted = []
+        goalList.forEach((g) => {
+          goalListFormatted.push({ label: g+' Progress', value: g })
+        })
+        setProgressTypes(goalListFormatted)
+        
+        getChartData("weight")
       })
   }, []);
+
+
+
   data={
-    labels: weightDates,
+    labels: chartDates,
     datasets: [{
-      data: weight
+      data: achievedData,
+      strokeWidth: 4,
+      color: (opacity = 1) => `rgba(134, 0, 0, 1)` // optional
+    },
+    {
+      data: goalData,
+      strokeWidth: 4,
+      color: (opacity = 1) => `rgba(0, 0, 100, 1)` // optional
     }]
   }
   
@@ -44,7 +95,11 @@ let Progess = (props) => {
       <Text style={styles._heading}>View Progress</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles._progess_heading_main}>
-          <Text style={styles._progess_heading}>Weight Progress</Text>
+          <RNPickerSelect value={selectedProgressType}
+              onValueChange={(value) => {setSelectedProgressType(value); getChartData();}}
+              items={progressTypes}
+              style={pickerSelectStyles}
+          />
         </View>
         <View style={styles._chart}>
           <Chart datainput = {data} />
@@ -58,6 +113,20 @@ let Progess = (props) => {
     </SafeAreaView>
   );
 };
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+      fontSize: 20,
+      fontFamily: "Comfortaa-Regular",
+      fontWeight: "bold",
+      paddingVertical: 12,
+      paddingHorizontal: 10,
+      borderWidth: 0,
+      borderColor: 'gray',
+      borderRadius: 4,
+      color: 'black',
+      paddingRight: 30 // to ensure the text is never behind the icon
+  },
+});
 let styles = StyleSheet.create({
   _container: {
     flex: 1,
@@ -76,13 +145,22 @@ let styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
     paddingHorizontal: 10,
-    justifyContent: "center",
+    flex:1,
+    alignItems: "center",
+    justifyContent  : "center",
   },
   _progess_heading: {
     color: "#000",
     fontSize: 20,
     fontFamily: "Comfortaa-Regular",
     fontWeight: "bold",
+  },
+  __progress_type: {
+    color: "#000",
+    fontSize: 20,
+    fontFamily: "Comfortaa-Regular",
+    fontWeight: "bold",
+    alignItems: 'center'
   },
   _chart: {
     marginTop: 20,

@@ -26,10 +26,6 @@ export default function HomeScreen(props) {
                   </TouchableOpacity>
                 </View>
 
-                <Text style={styles.info}>
-                    Some stuff about the app and the services we offer.
-                    Stuff about how to navigate the app.
-                </Text>
                 <TouchableOpacity
                         style={styles.button}
                         onPress={() => onLoginPress()}>
@@ -47,6 +43,7 @@ export default function HomeScreen(props) {
                     onPress={() => handleSignOut()}>
                     <Text style={styles.buttonTitle}>Manage Goals</Text>
                 </TouchableOpacity>
+ 
             </KeyboardAwareScrollView>
         </View>
     )

@@ -6,6 +6,7 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     title: {
+        marginTop: 30,
         margin: 16,
         fontSize: 30,
     },
@@ -34,7 +35,6 @@ export default StyleSheet.create({
         paddingLeft: 16
     },
     button: {
-        //backgroundColor: '#788eec',
         marginLeft: 60,
         marginRight: 60,
         marginTop: 20,
@@ -45,7 +45,6 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },
     profile: {
-        //backgroundColor: '#788eec',
         margin: 16,
         height: 64,
         width: 64,

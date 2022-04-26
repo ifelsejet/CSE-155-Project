@@ -12,38 +12,43 @@ export default function HomeScreen(props) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
+                
+                    <View
+                    style={{ flex: 1,  width: '100%', flexDirection: "row", justifyContent: 'space-between' }}>
+                        <Text style={styles.title}>Welcome, USER!</Text>
 
-                <View
-                style={{ flex: 1,  width: '100%', flexDirection: "row", justifyContent: 'space-between' }}>
-                    <Text style={styles.title}>Welcome, USER!</Text>
-
-                    <TouchableOpacity
-                    onPress={() => onLoginPress()}>
-                        <Image
-                            style={styles.profile}
-                            source={require('../../../assets/profile.png')}
-                        />
-                  </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity
-                        style={styles.button}
+                        <TouchableOpacity
                         onPress={() => onLoginPress()}>
-                        <Text style={styles.buttonTitle}>Update Progress</Text>
-                </TouchableOpacity>
+                            <Image
+                                style={styles.profile}
+                                source={require('../../../assets/profile.png')}
+                            />
+                    </TouchableOpacity>
+                    </View>
 
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>View Progress</Text>
-                </TouchableOpacity>
+                    <View style={{flex: 1, justifyContent:"flex-end", height:'100%'}}>
+                        <Text style={styles.spacing}></Text>
+                    </View>
 
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => handleSignOut()}>
-                    <Text style={styles.buttonTitle}>Manage Goals</Text>
-                </TouchableOpacity>
- 
+                    <View style={{flex: 1, justifyContent:"flex-end", height:'100%'}}>
+                        <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => onLoginPress()}>
+                                <Text style={styles.buttonTitle}>Update Progress</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => onLoginPress()}>
+                            <Text style={styles.buttonTitle}>View Progress</Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={styles.button}
+                            onPress={() => handleSignOut()}>
+                            <Text style={styles.buttonTitle}>Manage Goals</Text>
+                        </TouchableOpacity>
+                    </View>
             </KeyboardAwareScrollView>
         </View>
     )

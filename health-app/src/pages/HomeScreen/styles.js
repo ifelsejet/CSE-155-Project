@@ -3,11 +3,11 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     title: {
         marginTop: 30,
-        margin: 16,
+        marginLeft: 16,
         fontSize: 30,
     },
     logo: {
@@ -42,13 +42,19 @@ export default StyleSheet.create({
         borderRadius: 5,
         borderWidth: 2,
         alignItems: "center",
-        justifyContent: 'center'
+        justifyContent: 'center',
+        
     },
     profile: {
         margin: 16,
         height: 64,
         width: 64,
         borderRadius: 5,
+    },
+    spacing: {
+        margin: 16,
+        height: 100,
+        width: 100,
     },
     buttonTitle: {
         color: 'black',

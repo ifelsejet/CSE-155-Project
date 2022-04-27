@@ -24,6 +24,7 @@ const Stack = createStackNavigator();
 
 export default function HomeScreen(props) {
     //const navigation = useNavigation();
+    //console.log(props.user);
 
     
     return (

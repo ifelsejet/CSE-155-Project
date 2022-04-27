@@ -18,6 +18,10 @@ export default function RegistrationScreen({navigation}) {
         //navigation.navigate('Login')
     }
     //call handleSignOut on button press to sign out
+    const onButtonPress = () => {
+        console.log("Pressed the button");
+        navigation.navigate('More');
+    }
 
     const onRegisterPress = () => {
         var data;
@@ -98,7 +102,7 @@ export default function RegistrationScreen({navigation}) {
                 />
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => onRegisterPress()}>
+                    onPress={() => onButtonPress()}>
                     <Text style={styles.buttonTitle}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>

@@ -6,7 +6,7 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        marginTop: 30,
+        marginTop: 50,
         margin: 16,
         fontSize: 30,
     },
@@ -43,6 +43,7 @@ export default StyleSheet.create({
         borderRadius: 5,
         borderWidth: 2,
         alignItems: "center",
+        marginTop: 40,
         justifyContent: 'center'
     },
     profile: {
@@ -50,6 +51,8 @@ export default StyleSheet.create({
         margin: 16,
         height: 64,
         width: 64,
+        marginTop: 20,
+        marginRight: 40,
         borderRadius: 5,
     },
     buttonTitle: {

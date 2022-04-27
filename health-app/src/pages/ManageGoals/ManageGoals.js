@@ -42,7 +42,7 @@ export default function ManageGoals(props) {
         const list = [...inputList];
         list[i][name] = e;
         setInputList(list);
-        console.log(e)
+        // console.log(e)
     }
 
     const onClick = () => {
@@ -118,7 +118,6 @@ export default function ManageGoals(props) {
                             <TextInput
                                 name="title"
                                 placeholder=""
-                                value={userTitle}
                                 onChangeText={(userTitle) => setUserTitle(userTitle)}
                             />
                         </View>
@@ -126,7 +125,6 @@ export default function ManageGoals(props) {
                             <TextInput
                                 name="amount"
                                 placeholder=""
-                                value={userAmount}
                                 onChangeText={userAmount => setUserAmount(userAmount)}
                             />
                         </View>

@@ -13,6 +13,7 @@ export default StyleSheet.create({
         // alignItems: "center",
         // justifyContent: "center",
         marginTop: 40,
+        marginLeft: 10,
       },
       _heading: {
         color: "#000",
@@ -20,6 +21,7 @@ export default StyleSheet.create({
         fontFamily: "Comfortaa-Regular",
         marginTop: 10,
         marginBottom: 20,
+        marginLeft: 10
       },
       _progess_heading_main: {
         backgroundColor: "#C4C4C4",
@@ -27,6 +29,8 @@ export default StyleSheet.create({
         borderRadius: 5,
         paddingHorizontal: 10,
         justifyContent: "center",
+        marginLeft: 10,
+        marginRight: 10,
       },
       _btn: {
         backgroundColor: "#000",

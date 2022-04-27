@@ -19,13 +19,12 @@ import styles from './styles';
  
 export default function ViewProgress(props) {
 
-    console.log("Inside Progress");
-    console.log(props.user.uid);
-
-
+    // console.log("Inside Progress");
+    // console.log(props.user.uid);
 
     var docData = {};
-    var data;
+    data = {}
+    data_for_charts = []
     var [achievedData, setAchievedData] = useState([0]);
     var [chartDates, setCharttDates] = useState([0]);
     var [goalData, setGoalData] = useState([0]);
@@ -68,11 +67,24 @@ export default function ViewProgress(props) {
         setAchievedData(achievedValues)
         setGoalData(goalValues)
         setCharttDates(mergedDates)
+
+        data_for_charts.push({
+          labels: mergedDates,
+          datasets: [{
+            data: achievedValues,
+            strokeWidth: 4,
+            color: (opacity = 1) => `rgba(134, 0, 0, 1)` // optional
+          },
+          {
+            data: goalValues,
+            strokeWidth: 4,
+            color: (opacity = 1) => `rgba(0, 0, 100, 1)` // optional
+          }]
+        });
+
       }
 
     useEffect(() => {
-     
-
       const docRef = doc(db,'users', String(props.user.uid));
       getDoc(docRef)
         .then((doc) => {
@@ -84,14 +96,13 @@ export default function ViewProgress(props) {
           goalListFormatted.push({ label: g+' Progress', value: g })
         })
         setProgressTypes(goalListFormatted)
-
-        getChartData("weight")
+        getChartData()
       })
   }, []);
 
 
 
-  data={
+  data = {
     labels: chartDates,
     datasets: [{
       data: achievedData,
@@ -106,58 +117,49 @@ export default function ViewProgress(props) {
   }
     
        
-    return (
-        <View style={styles.container}>
-        <TouchableOpacity style={styles._back} onPress={() => props.navigation.goBack()}>
+  return (
+      <View style={styles.container}>
+      <TouchableOpacity style={styles._back} onPress={() => props.navigation.goBack()}>
       <AntDesign name="back" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles._heading}>View Progress</Text>
-        <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles._progess_heading_main}>
-        <RNPickerSelect value={selectedProgressType}
-              onValueChange={(value) => {setSelectedProgressType(value); getChartData();}}
-              items={progressTypes}
-              style={styles.pickerSelectStyles}
-        />    
-        </View>
-        <View style={styles._chart}>
-
-       
-        <LineChart
-    data={
-      data
-    }
-    width={Dimensions.get('window').width} // from react-native
-    height={220}
-    chartConfig={{
-      backgroundColor: '#C4C4C4',
-      backgroundGradientFrom: '#000',
-      backgroundGradientTo: '#fff',
-      decimalPlaces: 2, // optional, defaults to 2dp
-      color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-      style: {
-        borderRadius: 16
-      }
-    }}
-    bezier
-    style={{
-      marginVertical: 8,
-      borderRadius: 16
-    }}
-  />
-   </View>
-   <TouchableOpacity style={styles._btn} onPress={() => props.navigation.navigate('Update')}>
-      <Text style={styles._btn_text}> Update/Add Progress </Text>
-    </TouchableOpacity>
-
-    
-   <View style={{ paddingBottom: 20 }} />
-   </ScrollView>
-   </View>
-
-
-
-       
+      </TouchableOpacity>
+      <Text style={styles._heading}>View Progress</Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles._progess_heading_main}>
+      <RNPickerSelect value={selectedProgressType}
+            onValueChange={(value) => {setSelectedProgressType(value);}}
+            items={progressTypes}
+            style={styles.pickerSelectStyles}
+      />    
+      </View>
+      <View style={styles._chart}>
+      <LineChart
+        data={data}
+        width={Dimensions.get('window').width} // from react-native
+        height={220}
+        chartConfig={{
+          backgroundColor: '#C4C4C4',
+          backgroundGradientFrom: '#000',
+          backgroundGradientTo: '#fff',
+          decimalPlaces: 2, // optional, defaults to 2dp
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          style: {
+            borderRadius: 16
+          }
+        }}
+        bezier
+        style={{
+          marginVertical: 8,
+          borderRadius: 16
+        }}
+      />
+      </View>
+      <TouchableOpacity style={styles._btn} onPress={() => props.navigation.navigate('Update')}>
+        <Text style={styles._btn_text}> Update/Add Progress </Text>
+      </TouchableOpacity>
+        
+      <View style={{ paddingBottom: 20 }} />
+      </ScrollView>
+      </View>
   );
-    
+   
 }

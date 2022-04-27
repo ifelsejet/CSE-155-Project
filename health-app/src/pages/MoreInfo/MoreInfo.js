@@ -1,21 +1,27 @@
 import React, { useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import styles from './styles';
 import {db, authentication, handleSignOut} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword, getAuth} from "firebase/auth";
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
 
+import styles from './styles';
 
 export default function MoreInfo({navigation}) {
-    const [fullName, setFullName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-
+    let [name, setName] = useState("");
+    let [weight, setWeight] = useState("");
+    let [age, setAge] = useState("");
+    let [height, setHeight] = useState("");
+    let [fitness, setFitness] = useState("");
+    console.log("off the grid");
     const onFooterLinkPress = () => {
         navigation.goBack();
         //navigation.navigate('Login')
+    }
+
+    const onButtonPress = () => {
+        console.log("Pressed the button");
+        navigation.navigate('MoreInfo');
     }
     //call handleSignOut on button press to sign out
 
@@ -57,49 +63,62 @@ export default function MoreInfo({navigation}) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-               <Text style={styles.heading}> Register</Text>
+               <Text style={styles._heading}>Add Personal Information</Text>
+               <Text style={styles._title}>Name:</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder='Full Name'
+                    placeholder=''
                     placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFullName(text)}
-                    value={fullName}
+                    onChangeText={(text) => setName(text)}
+                    value={name}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                <Text style={styles._title}>Weight:</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder='E-mail'
+                    placeholder=''
                     placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEmail(text)}
-                    value={email}
+                    onChangeText={(text) => setWeight(text)}
+                    value={weight}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                <Text style={styles._title}>Age:</Text>
                 <TextInput
                     style={styles.input}
+                    placeholder=''
                     placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Password'
-                    onChangeText={(text) => setPassword(text)}
-                    value={password}
+                    onChangeText={(text) => setAge(text)}
+                    value={age}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                <Text style={styles._title}>Height:</Text>
                 <TextInput
                     style={styles.input}
+                    placeholder=''
                     placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder='Confirm Password'
-                    onChangeText={(text) => setConfirmPassword(text)}
-                    value={confirmPassword}
+                    onChangeText={(text) => setHeight(text)}
+                    value={height}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                <Text style={styles._title}>Fitness Goal:</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder=''
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setFitness(text)}
+                    value={fitness}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+
                 <TouchableOpacity
-                    style={styles.button}
+                    style={styles._btn}
                     onPress={() => onRegisterPress()}>
-                    <Text style={styles.buttonTitle}>Create account</Text>
+                    <Text style={styles._btn_text}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
                     <Text style={styles.footerText}>Already got an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Log in!</Text></Text>

@@ -16,6 +16,7 @@ import ProfileScreen from './src/pages/ProfileScreen/ProfileScreen';
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPendingWrites} from "firebase/firestore";
 import {db} from "../health-app/src/firebase/config"
 import ManageGoals from './src/pages/ManageGoals/ManageGoals';
+import MoreInfo from './src/pages/MoreInfo/MoreInfo';
 /*
 let [fontsLoaded] = useFonts({
   "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
@@ -88,9 +89,9 @@ export default function App() {
         
         : (
           <>
-            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}
- />
-            <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }}/> 
+            <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }}/>
+            <Stack.Screen name="More" component={MoreInfo} options={{ headerShown: false }}/> 
 
           </>
         )}

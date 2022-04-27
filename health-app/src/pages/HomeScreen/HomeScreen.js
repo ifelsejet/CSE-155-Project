@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Image, Text, View, TouchableOpacity } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {db, authentication, handleSignOut} from "../../firebase/config";
@@ -24,7 +24,15 @@ const Stack = createStackNavigator();
 
 export default function HomeScreen(props) {
     //const navigation = useNavigation();
-
+    var [userName, setUserName] = useState("User");
+    useEffect(() => {
+        const docRef = doc(db,'users', String(props.user.uid));
+        getDoc(docRef)
+          .then((doc) => {
+            var docData = doc.data()
+            setUserName(docData["data"]["name"])
+        })
+    }, []);
     
     return (
         <View style={styles.container}>
@@ -34,7 +42,7 @@ export default function HomeScreen(props) {
 
             <View
             style={{ flex: 1, width: '100%', flexDirection: "row", justifyContent: 'space-between' }}>
-                <Text style={styles.title}>Welcome, USER!</Text>
+                <Text style={styles.title}>Welcome, {userName}!</Text>
 
                 <TouchableOpacity
                     style={styles.profile}

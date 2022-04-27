@@ -47,10 +47,7 @@ export default function HomeScreen(props) {
                 </TouchableOpacity>
             </View>
 
-            <Text style={styles.info}>
-                Some stuff about the app and the services we offer.
-                Stuff about how to navigate the app.
-            </Text>
+        
             <TouchableOpacity
                     style={styles.button}
                     onPress={() => props.navigation.navigate('Update')}>

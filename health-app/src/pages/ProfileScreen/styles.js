@@ -31,6 +31,15 @@ export default StyleSheet.create({
         paddingLeft: 16
         */
     },
+    _signOutbtn:{
+        backgroundColor: "#d32f2f",
+        height: 50,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+        marginTop: 20,
+    },
       _back: {
         // width: 50,
         // height: 50,

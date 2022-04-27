@@ -52,6 +52,10 @@ export default StyleSheet.create({
       },
       _chart: {
         marginTop: 20,
+        alignItems: "center",
+        width: 250, 
+        height: 250, 
+        backgroundColor: 'powderblue'
       },
       
       pickerSelectStyles: {

@@ -25,7 +25,8 @@ export default function ViewProgress(props) {
     var [achievedData, setAchievedData] = useState([0]);
     var [chartDates, setCharttDates] = useState([0]);
     var [goalData, setGoalData] = useState([0]);
-    const [modalVisibleList, setModalVisibleList] = useState([false, false, false, false]);
+    var [goalsList, setGoalsList] = useState([]);
+    const [modalVisibleList, setModalVisibleList] = useState([]);
 
     const [selectedProgressType, setSelectedProgressType] = useState("weight");
     const [progressTypes, setProgressTypes] = useState([
@@ -98,10 +99,11 @@ export default function ViewProgress(props) {
           })
           setProgressTypes(goalListFormatted)
           getChartData(goalList)
-          console.log(modalVisibleList)
-          // var temp_modal_visibleList = new Array(goalList.length).fill(false)
-          // temp_modal_visibleList[goalList.indexOf("weight")] = true
-          // setModalVisibleList(temp_modal_visibleList)
+          setGoalsList(goalList)
+
+          var temp_modal_visibleList = new Array(goalList.length).fill('none')
+          temp_modal_visibleList[goalList.indexOf("weight")] = 'block'
+          setModalVisibleList(temp_modal_visibleList)
       })
   }, []);
 
@@ -131,15 +133,20 @@ export default function ViewProgress(props) {
       <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles._progess_heading_main}>
       <RNPickerSelect value={selectedProgressType}
-            onValueChange={(value) => {setSelectedProgressType(value);}}
+            onValueChange={(value) => {
+              setSelectedProgressType(value);
+              var temp_modal_visibleList = new Array(goalsList.length).fill('none')
+              temp_modal_visibleList[goalsList.indexOf(value)] = 'block'
+              setModalVisibleList(temp_modal_visibleList)
+            }}
             items={progressTypes}
             style={styles.pickerSelectStyles}
       />    
       </View>
-      <View style={styles._chart}>
       {data_for_charts.map((task, index) => {
-        return(<LineChart
-          visible = {false}
+        return(
+          <View key = {index} style={{marginTop: 20, alignItems: "center", display: modalVisibleList[index]}} >
+        <LineChart
           key = {index}
           data={task}
           width={Dimensions.get('window').width - 10} // from react-native
@@ -158,9 +165,10 @@ export default function ViewProgress(props) {
             marginVertical: 8,
             borderRadius: 16
           }}
-        />);
+        />
+        </View>);
       })}
-      </View>
+      
       <TouchableOpacity style={styles._btn} onPress={() => props.navigation.navigate('Update')}>
         <Text style={styles._btn_text}> Update/Add Progress </Text>
       </TouchableOpacity>

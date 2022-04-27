@@ -111,6 +111,12 @@ export default StyleSheet.create({
     width: 85,
     height: 80,
   },
+  _leftButton1: {
+    width: 85,
+    height: 80,
+    marginLeft: 305,
+    marginTop: -65
+  },
   _title: {
     color: "#000",
     fontSize: 15,
@@ -141,10 +147,20 @@ export default StyleSheet.create({
   _input_main: {
     borderWidth: 1.5,
     borderColor: "#000",
-    marginTop: 20,
-    marginLeft: 100,
-    height: 50,
+    marginTop: -40,
+    marginLeft: 210,
+    height: 40,
     width: 50,
+    paddingHorizontal: 10,
+    borderRadius: 5,
+  },
+  _input_main1: {
+    borderWidth: 1.5,
+    borderColor: "#000",
+    marginTop: 20,
+    marginLeft: 10,
+    height: 40,
+    width: 150,
     paddingHorizontal: 10,
     borderRadius: 5,
   },

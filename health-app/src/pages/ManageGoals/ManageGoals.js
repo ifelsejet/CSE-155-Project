@@ -83,6 +83,9 @@ export default function ManageGoals(props) {
                             <TouchableOpacity style={styles._btn} onPress={() => setModalVisible(!modalVisible)}>
                                 <Text style={styles._btn_text}> Save New Goal! </Text>
                             </TouchableOpacity>
+                            <TouchableOpacity type="submit" style={styles._btn1} onPress={() => setModalVisible(!modalVisible)}>
+                                <Text style={styles._btn_text}> Cancel </Text>
+                            </TouchableOpacity>
                         </View>
                     </Modal>
                 </View>

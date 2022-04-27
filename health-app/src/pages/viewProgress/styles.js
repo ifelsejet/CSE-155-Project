@@ -52,6 +52,7 @@ export default StyleSheet.create({
       },
       _chart: {
         marginTop: 20,
+        alignItems: "center"
       },
       
       pickerSelectStyles: {

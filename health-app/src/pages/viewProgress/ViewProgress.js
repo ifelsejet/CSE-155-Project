@@ -4,7 +4,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import {useAuth, authentication} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { AntDesign } from "@expo/vector-icons";
-import { LineChart } from 'react-native-line-chart'
+import { LineChart } from 'react-native-chart-kit'
 import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
     waitForPendingWrites, where, query
 } from "firebase/firestore";
@@ -12,13 +12,10 @@ import {db} from "../../firebase/config";
 import {Dimensions} from "react-native"
 import RNPickerSelect from 'react-native-picker-select';
 
-
 import styles from './styles';
-
 
  
 export default function ViewProgress(props) {
-
     // console.log("Inside Progress");
     // console.log(props.user.uid);
 
@@ -81,7 +78,7 @@ export default function ViewProgress(props) {
           {
             data: goalValues,
             strokeWidth: 4,
-            color: (opacity = 1) => `rgba(0, 0, 255, 1)` // optional
+            color: (opacity = 1) => `rgba(183,200,10, 0.75)` // optional
           }]
         });
       });
@@ -143,15 +140,13 @@ export default function ViewProgress(props) {
       {data_for_charts.map((task, index) => {
         return(<LineChart
           visible = {false}
-          transparent={true}
           key = {index}
           data={task}
-          width={Dimensions.get('window').width} // from react-native
+          width={Dimensions.get('window').width - 10} // from react-native
           height={220}
           chartConfig={{
-            backgroundColor: '#C4C4C4',
-            backgroundGradientFrom: '#000',
-            backgroundGradientTo: '#fff',
+            backgroundGradientFrom: '#202020',
+            backgroundGradientTo: '#202020',
             decimalPlaces: 2, // optional, defaults to 2dp
             color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {

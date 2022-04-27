@@ -33,6 +33,8 @@ export default function HomeScreen(props) {
             setUserName(docData["data"]["name"])
         })
     }, []);
+    //console.log(props.user);
+
     
     return (
         <View style={styles.container}>

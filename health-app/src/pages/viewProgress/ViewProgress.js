@@ -40,7 +40,6 @@ export default function ViewProgress(props) {
         var dataKeys = Object.keys(docData["data"][prog_type])
         var goalKeys = Object.keys(docData["Goals"][prog_type])
         var mergedDates = [...new Set([...dataKeys, ...goalKeys])];
-        mergedDates.sort();
     
         var achievedValues = [0];
         var goalValues = [0];
@@ -65,6 +64,16 @@ export default function ViewProgress(props) {
         }, mergedDates); // use arr as this
         achievedValues.shift()
         goalValues.shift()
+
+        const indices = Array.from(mergedDates.keys())
+        indices.sort( (a,b) => mergedDates[a] -  mergedDates[b])
+
+        mergedDates = indices.map(i => mergedDates[i])
+        console.log(mergedDates)
+        achievedValues = indices.map(i => achievedValues[i])
+        goalValues = indices.map(i => goalValues[i])
+
+
         setAchievedData(achievedValues)
         setGoalData(goalValues)
         setCharttDates(mergedDates)

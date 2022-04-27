@@ -44,6 +44,17 @@ export default StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
   },
+  _btn1: {
+    backgroundColor: "red",
+    height: 50,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10,
+  },
   _btn_text: {
     color: "#fff",
     fontSize: 14,

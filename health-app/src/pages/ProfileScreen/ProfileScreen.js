@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
+import { Image, Alert, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import {useAuth, authentication} from "../../firebase/config";
+import {useAuth, authentication, handleSignOut} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -11,6 +11,29 @@ import styles from './styles';
 
 
 export default function ProfileScreen(props) {
+  function signOut () {
+    console.log("Ok, should be logging out..");
+   // handleSignOut();
+   // props.navigation.navigate('Login');
+   //TODO: Handle Sign out and go back to login Screen @ Yash
+
+  }
+  const showAlert = () =>  
+  Alert.alert(
+    "Sign Out?",
+    "Are you sure you want to sign out of your account?",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => signOut() }
+    ],
+    {
+      cancelable: true,
+    }
+  );
     let [weight, setWeight] = useState("");
     let [age, setAge] = useState("");
     let [height, setHeight] = useState("");
@@ -71,6 +94,9 @@ export default function ProfileScreen(props) {
                 />
          <TouchableOpacity style={styles._btn} onPress={() => props.navigation.navigate('Home')}>
       <Text style={styles._btn_text}> Update User Profile </Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={styles._signOutbtn} onPress={() => showAlert()}>
+      <Text style={styles._btn_text}> Sign Out </Text>
     </TouchableOpacity>
         <View style={{ paddingBottom: 20 }} />
         </ScrollView>

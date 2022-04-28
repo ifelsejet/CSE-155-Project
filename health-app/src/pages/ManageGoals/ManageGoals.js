@@ -1,23 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ScrollView, Modal, Image, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useAuth, authentication } from "../../firebase/config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { AntDesign } from "@expo/vector-icons";
 import styles from './styles';
+import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
+    waitForPendingWrites, where, query
+} from "firebase/firestore";
+import {db} from "../../firebase/config";
 
 
 
 export default function ManageGoals(props) {
-    const showAlert = () =>
+    const showAlert = () => {
+        var db_update = {}
+        var currDate = new Date(Date.now())
+        currDate = currDate.toString();
+        inputList.forEach((val) => {
+            if(val.amount == "")
+                return;
+
+            db_update["Goals."+val.title.replace("\n", " ")+'.'+currDate] = parseInt(val.amount)
+        })
+        const docRef = doc(db,'users', String(props.user.uid));
+        updateDoc(docRef, db_update);
+
         Alert.alert(
             'Manage Goals',
             'Goals were successfuly updated!',
-            // [
+            [
 
-            //     { text: 'OK', onPress: () => props.navigation.navigate('Home') },
-            // ]
+                { text: 'OK', onPress: () => props.navigation.navigate('Home') },
+            ]
         );
+    }
 
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -25,6 +42,27 @@ export default function ManageGoals(props) {
     const [userAmount, setUserAmount] = useState("")
 
     const [inputList, setInputList] = useState([]);
+
+    useEffect(() => {
+        const docRef = doc(db,'users', String(props.user.uid));
+        getDoc(docRef)
+          .then((doc) => {
+            var docData = doc.data()
+            var goalList = Object.keys(docData["Goals"])
+            goalList.forEach((ele, index)=>{
+                var dates = Object.keys(docData["Goals"][ele])
+                dates.forEach(function(part, index) {
+                    this[index] = new Date(this[index]);
+                  }, dates);
+                const indices = Array.from(dates.keys())
+                indices.sort( (a,b) => dates[a] -  dates[b])
+                var key = Object.keys(docData["Goals"][ele])[indices.slice(-1)]
+
+                goalList[index] = {title: ele, amount: docData["Goals"][ele][key].toString()}
+            })
+            setInputList(goalList)
+        })
+    }, []);
 
     const addGoalFields = () => {
         let newFields = { title: userTitle, amount: userAmount }
@@ -69,7 +107,7 @@ export default function ManageGoals(props) {
 
                 {inputList.map((element, index) => {
                     return (
-                        <>
+                        <View key = {index}>
                             <TextInput name="title" value={element.title} placeholder="" onChangeText={e => handleChange("title",e, index)}
                                 style={styles._input_main1} placeholderTextColor="#000"
                                 secureTextEntry={false} />
@@ -89,7 +127,7 @@ export default function ManageGoals(props) {
                                     <Text style={styles._btn_text}> Remove </Text>
                                 </TouchableOpacity>}
                             </View>
-                        </>
+                        </View>
                     )
                 })}
 

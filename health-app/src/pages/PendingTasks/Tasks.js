@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Comfortaa-Regular',
     fontSize: 15,
     marginLeft: 160,
-    marginTop: -53,
-    paddingTop: 30,
-    paddingBottom: 30,
+    marginTop: -56,
+    paddingTop: 40,
+    paddingBottom: 40,
     textAlignVertical: "center"
   },
   addWrapper: {

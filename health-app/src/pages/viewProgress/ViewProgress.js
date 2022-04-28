@@ -37,6 +37,23 @@ export default function ViewProgress(props) {
       setData_for_charts([])
       var temp_data_for_charts = []
       goalList.forEach( (prog_type) => {
+        if(!(prog_type in docData["data"])){
+          temp_data_for_charts.push({
+            labels: [0],
+            datasets: [{
+              data: [0],
+              strokeWidth: 4,
+              color: (opacity = 1) => `rgba(255, 0, 0, 1)` // optional
+            },
+            {
+              data: [0],
+              strokeWidth: 4,
+              color: (opacity = 1) => `rgba(183,200,10, 0.75)` // optional
+            }]
+          });
+          return
+        }
+
         var dataKeys = Object.keys(docData["data"][prog_type])
         var goalKeys = Object.keys(docData["Goals"][prog_type])
         var mergedDates = [...new Set([...dataKeys, ...goalKeys])];

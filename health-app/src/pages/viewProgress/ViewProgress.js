@@ -77,7 +77,6 @@ export default function ViewProgress(props) {
         })
         mergedDates.forEach(function(part, index) {
           this[index] = new Date(this[index]);
-          this[index] = this[index].getDate();
         }, mergedDates); // use arr as this
         achievedValues.shift()
         goalValues.shift()
@@ -86,7 +85,17 @@ export default function ViewProgress(props) {
         indices.sort( (a,b) => mergedDates[a] -  mergedDates[b])
 
         mergedDates = indices.map(i => mergedDates[i])
-        console.log(mergedDates)
+
+        mergedDates.forEach(function(part, index) {
+          var dateObj = this[index];
+          var month = dateObj.getUTCMonth() + 1; //months from 1-12
+          var day = dateObj.getUTCDate();
+          var year = dateObj.getUTCFullYear();
+
+          var newdate =  month + "/" + day + "/" + year;
+          this[index] = newdate;
+        }, mergedDates); // use arr as this
+
         achievedValues = indices.map(i => achievedValues[i])
         goalValues = indices.map(i => goalValues[i])
 

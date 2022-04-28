@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { ScrollView, Modal, Image, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native'
+import { Keyboard, KeyboardAvoidingView, ScrollView, FlatList, Modal, Image, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useAuth, authentication } from "../../firebase/config";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
@@ -9,6 +9,7 @@ import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
     waitForPendingWrites, where, query
 } from "firebase/firestore";
 import {db} from "../../firebase/config";
+import Tasks from "./Tasks";
 
 
 
@@ -98,6 +99,24 @@ export default function PendingTasks(props) {
         })
     }, []);
 
+    const [task,setTask] = useState();
+
+    const [taskItems, setTaskItems] = useState([]);
+
+    const completeTask = (index) => {
+        let itemsCopy = [...taskItems];
+        itemsCopy.splice(index,1);
+        setTaskItems(itemsCopy);
+      }
+
+      const handleAddTask = () => {
+        Keyboard.dismiss()
+        setTaskItems([...taskItems, task])
+        setTask(null)
+      }
+    
+
+
     // console.log(inputList);
 
 
@@ -111,10 +130,33 @@ export default function PendingTasks(props) {
             <Text style={{
                 marginLeft: 10, fontFamily: 'Comfortaa-Regular',
                 fontSize: 13,
-            }}> Hi {userName}, here are your pending tasks for Today!</Text>
+            }}> Hi {userName}, here are your pending tasks for Today!
+            </Text>
+
+            <View style={styles.items}>
+    {
+    taskItems.map((item, index) => {
+      return(<TouchableOpacity key={index} onPress={() => completeTask(index)}>
+         <Tasks text={item}/>
+      </TouchableOpacity>)
+    })
+  }
+    </View>
+
+    <KeyboardAvoidingView 
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    style={styles.writeTaskWrapper}>
+    <TextInput style={styles.input} placeholder={"Enter a Task"} value={task}onChangeText={text => setTask(text)}/>
+    <TouchableOpacity onPress={() => handleAddTask()}>
+    <View style={styles.addWrapper}>
+      <Text style={styles.addText}>+</Text>
+    </View>
+    </TouchableOpacity>
+      </KeyboardAvoidingView>
+            
 
             
-            <View style={{ paddingBottom: 20 }} />
+
         </View>
     );
 

@@ -187,5 +187,29 @@ export default StyleSheet.create({
     fontSize: 15,
     fontFamily: "Comfortaa-Regular",
     marginTop: 10,
-  }
+  },
+  input: {
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+    width: 250,
+  },
+  addWrapper: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#C0C0C0',
+    borderWidth: 1,
+  },
+  items:{
+    marginTop: 30,
+
+},
+
 })

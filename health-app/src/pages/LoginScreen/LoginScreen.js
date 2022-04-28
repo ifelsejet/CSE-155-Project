@@ -36,8 +36,13 @@ export default function LoginScreen({navigation}) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-            <Text style={styles.heading}>Log in</Text>
+        <Text style={styles.heading}>Log in</Text>
 
+         <View style={styles.passwordContainer}>         
+            <Image
+                            style={styles.profile}
+                            source={require('../../../assets/profile.png')}
+            />
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
@@ -46,20 +51,26 @@ export default function LoginScreen({navigation}) {
                     value={email}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
-                    icon = {
-                        <AntDesign name="user" size={24} color="black" />
-                    }
+                  
                 />
+        </View>
+        <View style={styles.passwordContainer}>         
+
+                <Image
+                            style={styles.lock}
+                            source={require('../../../assets/lock.png')}
+            />
                 <TextInput
                     style={styles.input}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
-                    placeholder='Password!'
+                    placeholder='Password'
                     onChangeText={(text) => setPassword(text)}
                     value={password}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+        </View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>

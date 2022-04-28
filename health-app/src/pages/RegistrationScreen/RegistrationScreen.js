@@ -44,9 +44,12 @@ export default function RegistrationScreen({navigation}) {
                   height: height,  //change
                 }
               };
+              console.log("YAAAAAAAAAAAASH");
               data["weight"][currDate] = weight;
             const categoryCol = collection(db,'users');
-            setDoc(doc(categoryCol, uid), {data}).then((err) => console.log(err));
+            console.log("ayo????");
+            setDoc(doc(categoryCol, uid), {data}).then(() => console.log("insideSetDoc"));
+            console.log("literal pain");
 
 
 

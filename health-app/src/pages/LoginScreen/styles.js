@@ -6,6 +6,10 @@ export default StyleSheet.create({
         backgroundColor: "#fff",
         paddingHorizontal: 20,
     },
+    passwordContainer: {
+        flexDirection: 'row',
+      
+    },
     heading: {
         color: "#000",
         fontSize: 36,
@@ -87,6 +91,21 @@ export default StyleSheet.create({
     footerText: {
         fontSize: 16,
         color: '#2e2e2d'
+    },
+    profile: {
+        height: 25, 
+        width: 25,
+        marginTop: 32,
+        alignContent: 'center',
+        marginRight: 5,
+    },
+    lock: {
+        height: 25, 
+        width: 25,
+        marginTop: 32,
+        alignContent: 'center',
+        marginRight: 5,
+        
     },
     footerLink: {
         color: "#788eec",

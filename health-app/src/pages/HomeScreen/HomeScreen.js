@@ -29,7 +29,7 @@ export default function HomeScreen(props) {
         var date = new Date(Date.now());
         var curr_time = date.getHours();
         console.log(curr_time);
-        if (curr_time === 0) {
+        if (curr_time === 2) {
             return (
                 <TouchableOpacity style={styles.btn}>
                     <Text style={styles.btn_text} onPress={() => props.navigation.navigate('Pending')} >Remember to Complete Your Pending Tasks! </Text></TouchableOpacity>

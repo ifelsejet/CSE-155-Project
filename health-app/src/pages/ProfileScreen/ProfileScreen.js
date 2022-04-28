@@ -41,25 +41,26 @@ export default function ProfileScreen(props) {
     let [age, setAge] = useState("");
     let [height, setHeight] = useState("");
     let [fitness, setFitness] = useState("");
-    console.log("Built differently");
    
     let updateProfile = () => {
       var db_update = {}
-      if(!isNaN(age) )
+      if(!isNaN(age) && age != "" )
         db_update["data.age"] = parseInt(age)
-      if(!isNaN(height) )
+      if(!isNaN(height) && height != "")
         db_update["data.height"] = parseInt(height)
+      
       const docRef = doc(db,'users', String(props.user.uid));
       updateDoc(docRef, db_update);
-      props.navigation.navigate('Home')
+      // props.navigation.navigate('Home')
     }
     useEffect(() => {
       const docRef = doc(db,'users', String(props.user.uid));
       getDoc(docRef)
         .then((doc) => {
           var docData = doc.data()
-          if("height" in docData["data"])
-            setHeight(docData.data.height)
+          if("height" in docData["data"]){
+            setHeight(docData.data.height.toString())
+          }
           if("age" in docData["data"])
             setAge(docData.data.age.toString())
           if("name" in docData["data"])

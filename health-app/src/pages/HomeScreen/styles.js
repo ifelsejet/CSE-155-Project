@@ -22,8 +22,8 @@ export default StyleSheet.create({
         marginRight: 20,
       },
       btn_text: {
-        color: "#fff",
-        fontSize: 13,
+        color: "#000",
+        fontSize: 14,
         fontFamily: "Comfortaa-Regular",
         textTransform: "uppercase",
         fontWeight: "bold",

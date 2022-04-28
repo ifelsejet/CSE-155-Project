@@ -24,8 +24,10 @@ export default function UpdateProgress(props) {
         taskNames.forEach((val) => {
             if(val.amount == "")
                 return;
-
-            db_update["data."+val.title.replace("\n", " ")+'.'+currDate] = val.amount
+            var titleName = val.title;
+            if(val.title == "Weight")
+                titleName = "weight"
+            db_update["data."+titleName.replace("\n", " ")+'.'+currDate] = parseInt(val.amount)
         })
         const docRef = doc(db,'users', String(props.user.uid));
         updateDoc(docRef, db_update);
@@ -53,7 +55,9 @@ export default function UpdateProgress(props) {
             var docData = doc.data()
             var goalList = Object.keys(docData["Goals"])
             goalList.forEach((ele, index)=>{
-                goalList[index] = {title: ele.replace(" ", "\n"), amount: ""}
+                var temp = ele
+                temp = temp[0].toUpperCase() + temp.substring(1);
+                goalList[index] = {title: temp.replace(" ", "\n"), amount: ""}
             })
             setTaskNames(goalList)
         })

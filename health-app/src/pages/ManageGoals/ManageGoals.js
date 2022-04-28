@@ -20,8 +20,10 @@ export default function ManageGoals(props) {
         inputList.forEach((val) => {
             if(val.amount == "")
                 return;
-
-            db_update["Goals."+val.title.replace("\n", " ")+'.'+currDate] = parseInt(val.amount)
+            var titleName = val.title;
+            if(val.title == "Weight")
+                titleName = "weight"
+            db_update["Goals."+titleName.replace("\n", " ")+'.'+currDate] = parseInt(val.amount)
         })
         const docRef = doc(db,'users', String(props.user.uid));
         updateDoc(docRef, db_update);
@@ -58,7 +60,10 @@ export default function ManageGoals(props) {
                 indices.sort( (a,b) => dates[a] -  dates[b])
                 var key = Object.keys(docData["Goals"][ele])[indices.slice(-1)]
 
-                goalList[index] = {title: ele, amount: docData["Goals"][ele][key].toString()}
+                var temp = ele
+                temp = temp[0].toUpperCase() + temp.substring(1);
+
+                goalList[index] = {title: temp, amount: docData["Goals"][ele][key].toString()}
             })
             setInputList(goalList)
         })

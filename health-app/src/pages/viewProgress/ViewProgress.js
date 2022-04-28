@@ -31,7 +31,17 @@ export default function ViewProgress(props) {
 
   const [modalVisible, setModalVisible] = useState(false);
 
-  const onClick = (data) => {
+  var [viewDate, setViewDate] = useState("");
+  var [viewType, setViewType] = useState("");
+  var [viewAmount, setViewAmount] = useState("");
+
+  const onClick = (data, task) => {
+    setViewAmount(data.value)
+    setViewDate(task.labels[data.index])
+    if(data.getColor() == `rgba(0, 255, 255, 1)`)
+      setViewType("Progress")
+    else
+      setViewType("Goal")  
     setModalVisible(!modalVisible);
 
   }
@@ -51,7 +61,7 @@ export default function ViewProgress(props) {
           datasets: [{
             data: [0],
             strokeWidth: 4,
-            color: (opacity = 1) => `rgba(255, 0, 0, 1)` // optional
+            color: (opacity = 1) => `rgba(0, 255, 255, 1)` // optional
           },
           {
             data: [0],
@@ -100,7 +110,7 @@ export default function ViewProgress(props) {
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
 
-        var newdate = month + "/" + day //+ "/" + year;
+        var newdate = month + "/" + day + "/" + year;
         this[index] = newdate;
       }, mergedDates); // use arr as this
 
@@ -117,7 +127,7 @@ export default function ViewProgress(props) {
         datasets: [{
           data: achievedValues,
           strokeWidth: 4,
-          color: (opacity = 1) => `rgba(255, 0, 0, 1)` // optional
+          color: (opacity = 1) => `rgba(0, 255, 255, 1)` // optional
         },
         {
           data: goalValues,
@@ -139,7 +149,8 @@ export default function ViewProgress(props) {
         var goalList = [...new Set([...goalList, "weight"])];
         var goalListFormatted = []
         goalList.forEach((g) => {
-          goalListFormatted.push({ label: g + ' Progress', value: g })
+          var temp = g[0].toUpperCase() + g.substring(1);
+          goalListFormatted.push({ label: temp + ' Progress', value: g })
         })
         setProgressTypes(goalListFormatted)
         getChartData(goalList)
@@ -191,7 +202,7 @@ export default function ViewProgress(props) {
           return (
             <View key={index} style={{ marginTop: 20, alignItems: "center", display: modalVisibleList[index] }} >
               <LineChart
-                onDataPointClick={(data) => onClick(data)}
+                onDataPointClick={(data) => onClick(data, task)}
                 key={index}
                 data={task}
                 width={Dimensions.get('window').width - 10} // from react-native
@@ -231,13 +242,13 @@ export default function ViewProgress(props) {
 
 
               <View style={{ marginTop: 20, marginLeft: 15 }}>
-                <Text>Data</Text>
+                <Text>{viewType}</Text>
               </View>
               <View style={{ marginTop: -17, marginLeft: 99 }}>
-                <Text>Data</Text>
+                <Text>{viewAmount}</Text>
               </View>
               <View style={{ marginTop: -17, marginLeft: 195 }}>
-                <Text>Data</Text>
+                <Text>{viewDate}</Text>
               </View>
               <TouchableOpacity style={styles._btn2} onPress={() => setModalVisible(!modalVisible)}>
                 <Text style={styles._btn_text}> Close </Text>

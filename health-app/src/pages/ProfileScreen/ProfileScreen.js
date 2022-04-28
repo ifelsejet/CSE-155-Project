@@ -37,6 +37,24 @@ export default function ProfileScreen(props) {
       cancelable: true,
     }
   );
+
+  const showAlert1 = () =>  
+  Alert.alert(
+    "Updated",
+    "Your profile has been updated!",
+    [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+        style: "cancel"
+      },
+      { text: "OK", onPress: () => props.navigation.navigate('Home') }
+    ],
+    {
+      cancelable: true,
+    }
+  );
+
     let [name, setName] = useState("");
     let [age, setAge] = useState("");
     let [height, setHeight] = useState("");
@@ -51,7 +69,21 @@ export default function ProfileScreen(props) {
         db_update["data.height"] = parseInt(height)
       const docRef = doc(db,'users', String(props.user.uid));
       updateDoc(docRef, db_update);
-      props.navigation.navigate('Home')
+      Alert.alert(
+        "Updated",
+        "Your profile has been updated!",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => props.navigation.navigate('Home') }
+        ],
+        {
+          cancelable: true,
+        }
+      );
     }
     useEffect(() => {
       const docRef = doc(db,'users', String(props.user.uid));

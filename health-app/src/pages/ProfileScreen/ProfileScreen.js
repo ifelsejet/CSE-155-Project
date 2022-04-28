@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Image, Alert, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {useAuth, authentication, handleSignOut} from "../../firebase/config";
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { AntDesign } from "@expo/vector-icons";
-
+import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,
+  waitForPendingWrites, where, query
+} from "firebase/firestore";
+import {db} from "../../firebase/config";
 
 
 import styles from './styles';
@@ -34,13 +37,35 @@ export default function ProfileScreen(props) {
       cancelable: true,
     }
   );
-    let [weight, setWeight] = useState("");
+    let [name, setName] = useState("");
     let [age, setAge] = useState("");
     let [height, setHeight] = useState("");
     let [fitness, setFitness] = useState("");
     console.log("Built differently");
    
-      
+    let updateProfile = () => {
+      var db_update = {}
+      if(!isNaN(age) )
+        db_update["data.age"] = parseInt(age)
+      if(!isNaN(height) )
+        db_update["data.height"] = parseInt(height)
+      const docRef = doc(db,'users', String(props.user.uid));
+      updateDoc(docRef, db_update);
+      props.navigation.navigate('Home')
+    }
+    useEffect(() => {
+      const docRef = doc(db,'users', String(props.user.uid));
+      getDoc(docRef)
+        .then((doc) => {
+          var docData = doc.data()
+          if("height" in docData["data"])
+            setHeight(docData.data.height)
+          if("age" in docData["data"])
+            setAge(docData.data.age.toString())
+          if("name" in docData["data"])
+            setName(docData.data.name.toString())
+      })
+  }, []);
 
     return (
         <View style={styles.container}>
@@ -51,13 +76,13 @@ export default function ProfileScreen(props) {
         <Text style={styles._heading}>Profile</Text>
         <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles._title_main}>Update any or all of the following</Text>
-        <Text style={styles._title}>Weight:</Text>
+        <Text style={styles._title}>Name:</Text>
         <TextInput
                     style={styles.input}
                     placeholder=''
                     placeholderTextColor="#aaaaaa"
-                    onChangeText={(weight) => setWeight(weight)}
-                    value={weight}
+                    onChangeText={(name) => setName(name)}
+                    value={name}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
         />
@@ -71,7 +96,7 @@ export default function ProfileScreen(props) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-         <Text style={styles._title}>Height:</Text>
+         <Text style={styles._title}>Height (cm):</Text>
         <TextInput
                     style={styles.input}
                     placeholder=''
@@ -82,7 +107,7 @@ export default function ProfileScreen(props) {
                     autoCapitalize="none"
                 />
 
-        <Text style={styles._title}>Water (or any other task):</Text>
+        {/* <Text style={styles._title}>Water (or any other task):</Text>
         <TextInput
                     style={styles.input}
                     placeholder=''
@@ -91,9 +116,9 @@ export default function ProfileScreen(props) {
                     value={fitness}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
-                />
-         <TouchableOpacity style={styles._btn} onPress={() => props.navigation.navigate('Home')}>
-      <Text style={styles._btn_text}> Update User Profile </Text>
+                /> */}
+         <TouchableOpacity style={styles._btn} onPress={() => updateProfile()}>
+      <Text style={styles._btn_text} onPress = {() => updateProfile()}> Update User Profile </Text>
     </TouchableOpacity>
     <TouchableOpacity style={styles._signOutbtn} onPress={() => showAlert()}>
       <Text style={styles._btn_text}> Sign Out </Text>

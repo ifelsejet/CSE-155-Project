@@ -115,7 +115,8 @@ export default function ViewProgress(props) {
             data: goalValues,
             strokeWidth: 4,
             color: (opacity = 1) => `rgba(183,200,10, 0.75)` // optional
-          }]
+          }],
+          legend: ["Progress", "Goal"]
         });
       });
       setData_for_charts(temp_data_for_charts)
@@ -182,6 +183,7 @@ export default function ViewProgress(props) {
         return(
           <View key = {index} style={{marginTop: 20, alignItems: "center", display: modalVisibleList[index]}} >
         <LineChart
+          onDataPointClick={(data) => {console.log(data.getColor())}}
           key = {index}
           data={task}
           width={Dimensions.get('window').width - 10} // from react-native

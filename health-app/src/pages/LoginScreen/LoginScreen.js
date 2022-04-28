@@ -3,6 +3,8 @@ import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import {useAuth, authentication} from "../../firebase/config";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
+import { AntDesign } from '@expo/vector-icons'; 
+
 
 
 
@@ -12,7 +14,7 @@ export default function LoginScreen({navigation}) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const onFooterLinkPress = () => {
+    const onRegistrationPress = () => {
         navigation.navigate('Registration')
     }
 
@@ -34,10 +36,13 @@ export default function LoginScreen({navigation}) {
             <KeyboardAwareScrollView
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
-                <Image
-                    style={styles.logo}
-                    source={require('../../../assets/icon.png')}
-                />
+        <Text style={styles.heading}>Log in</Text>
+
+         <View style={styles.passwordContainer}>         
+            <Image
+                            style={styles.profile}
+                            source={require('../../../assets/profile.png')}
+            />
                 <TextInput
                     style={styles.input}
                     placeholder='E-mail'
@@ -46,7 +51,15 @@ export default function LoginScreen({navigation}) {
                     value={email}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
+                  
                 />
+        </View>
+        <View style={styles.passwordContainer}>         
+
+                <Image
+                            style={styles.lock}
+                            source={require('../../../assets/lock.png')}
+            />
                 <TextInput
                     style={styles.input}
                     placeholderTextColor="#aaaaaa"
@@ -57,14 +70,18 @@ export default function LoginScreen({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+        </View>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
-                </View>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => onRegistrationPress()}>
+                    <Text style={styles.buttonTitle}>Register a New Account</Text>
+                </TouchableOpacity>
+                
             </KeyboardAwareScrollView>
         </View>
     )

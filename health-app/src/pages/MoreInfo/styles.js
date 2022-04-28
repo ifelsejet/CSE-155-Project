@@ -83,7 +83,6 @@ export default StyleSheet.create({
         fontSize: 25,
         fontFamily: "Comfortaa-Regular",
         marginTop: 30,
-        paddingBottom: 10,
       },
       _title: {
         color: "#000",

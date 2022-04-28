@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
-    container: {
+    _container: {
         flex: 1,
         backgroundColor: "#fff",
         paddingHorizontal: 20,
@@ -17,6 +17,8 @@ export default StyleSheet.create({
         fontFamily: "Comfortaa-Regular",
         fontSize: 16,
         flex: 1,
+        marginLeft: 10,
+        marginRight:10,
 
         
         /*
@@ -31,28 +33,16 @@ export default StyleSheet.create({
         paddingLeft: 16
         */
     },
-    footerView: {
-        flex: 1,
-        alignItems: "center",
-        marginTop: 20
-    },
-    footerText: {
-        fontSize: 16,
-        color: '#2e2e2d'
-    },
-    footerLink: {
-        color: "#788eec",
-        fontWeight: "bold",
-        fontSize: 16
-    },
     _signOutbtn:{
-        backgroundColor: "#d32f2f",
+        backgroundColor: "red",
         height: 50,
         borderRadius: 5,
         alignItems: "center",
         justifyContent: "center",
         flexDirection: "row",
         marginTop: 20,
+        marginLeft: 10,
+        marginRight: 10
     },
       _back: {
         // width: 50,
@@ -61,6 +51,7 @@ export default StyleSheet.create({
         // alignItems: "center",
         // justifyContent: "center",
         marginTop: 40,
+        marginLeft: 10,
       },
       _btn: {
         backgroundColor: "#000",
@@ -70,6 +61,8 @@ export default StyleSheet.create({
         justifyContent: "center",
         flexDirection: "row",
         marginTop: 20,
+        marginRight: 10,
+        marginLeft: 10,
       },
       _btn_text: {
         color: "#fff",
@@ -82,8 +75,9 @@ export default StyleSheet.create({
         color: "#000",
         fontSize: 25,
         fontFamily: "Comfortaa-Regular",
-        marginTop: 30,
-        paddingBottom: 10,
+        marginTop: 10,
+        marginBottom: 20,
+        marginLeft: 10
       },
       _title: {
         color: "#000",
@@ -91,11 +85,13 @@ export default StyleSheet.create({
         fontFamily: "Comfortaa-Regular",
         marginBottom: -10,
         marginTop: 10,
+        marginLeft: 10,
       },
       _title_main:{
         color: "#000",
         fontSize: 15,
         fontFamily: "Comfortaa-Regular",
         marginTop: 10,
+        marginLeft: 10
       }
 })

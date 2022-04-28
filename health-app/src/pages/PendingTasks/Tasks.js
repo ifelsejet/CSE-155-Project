@@ -6,13 +6,9 @@ const Tasks = (props) => {
     return (
         <View style={styles.item}>
             <View style={styles.itemLeft}>
-        <TouchableOpacity style={styles.square}></TouchableOpacity>
-            <Text style={styles.itemText}>{props.text}</Text>
+            <Text style={styles.itemText}>{props.text.title}</Text>
+            <Text style={styles.itemText}>{props.text.amount}</Text>
             </View>
-            <Image
-                            style={styles.close}
-                            source={require('../../../assets/close.png')}
-                    />
         </View>
     )
 }

@@ -17,7 +17,7 @@ import styles from './styles';
 export default function UpdateProgress(props) {
     let [taskNames, setTaskNames] = useState([{title: "", amount: ""}]);
 
-    const showAlert = () => {
+    const showAlert = () => { 
         var db_update = {}
         var currDate = new Date(Date.now())
         currDate = currDate.toString();
@@ -25,7 +25,7 @@ export default function UpdateProgress(props) {
             if(val.amount == "")
                 return;
 
-            db_update["data."+val.title.replace("\n", " ")+'."'+currDate+'"'] = val.amount
+            db_update["data."+val.title.replace("\n", " ")+'.'+currDate] = val.amount
         })
         const docRef = doc(db,'users', String(props.user.uid));
         updateDoc(docRef, db_update);

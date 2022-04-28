@@ -17,6 +17,7 @@ import { collection, getDoc,updateDoc,onSnapshot,deleteDoc,doc,setDoc, waitForPe
 import {db} from "../health-app/src/firebase/config"
 import ManageGoals from './src/pages/ManageGoals/ManageGoals';
 import MoreInfo from './src/pages/MoreInfo/MoreInfo';
+import PendingTasks from './src/pages/PendingTasks/PendingTasks';
 /*
 let [fontsLoaded] = useFonts({
   "Comfortaa-Regular": require("./assets/fonts/Comfortaa-Regular.ttf"),
@@ -82,6 +83,9 @@ export default function App() {
           </Stack.Screen>
           <Stack.Screen name="Manage" options={{ headerShown: false }}>
             {props => <ManageGoals {...props} user={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="Pending" options={{ headerShown: false }}>
+            {props => <PendingTasks {...props} user={user} />}
           </Stack.Screen>
           </>
           

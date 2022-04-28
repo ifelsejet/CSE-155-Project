@@ -77,6 +77,13 @@ export default function HomeScreen(props) {
                 <Text style={styles.buttonTitle}>Manage Goals</Text>
                
             </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => props.navigation.navigate('Pending')}
+                >
+                <Text style={styles.buttonTitle}>View Pending Tasks</Text>
+               
+            </TouchableOpacity>
         </KeyboardAwareScrollView>
     </View>
     )

@@ -14,6 +14,7 @@ export default function MoreInfo({navigation}) {
     let [height, setHeight] = useState("");
     let [fitness, setFitness] = useState("");
     console.log("off the grid");
+    //console.log(props.user.uid);
     const onFooterLinkPress = () => {
         navigation.goBack();
         //navigation.navigate('Login')
@@ -24,7 +25,9 @@ export default function MoreInfo({navigation}) {
         navigation.navigate('MoreInfo');
     }
     //call handleSignOut on button press to sign out
+    const onMoreInfoPress = () => {
 
+    }
     const onRegisterPress = () => {
         var data;
         const auth = getAuth();
@@ -104,20 +107,10 @@ export default function MoreInfo({navigation}) {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <Text style={styles._title}>Fitness Goal:</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder=''
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFitness(text)}
-                    value={fitness}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-
+               
                 <TouchableOpacity
                     style={styles._btn}
-                    onPress={() => onRegisterPress()}>
+                    onPress={() => onMoreInfoPress()}>
                     <Text style={styles._btn_text}>Create account</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>

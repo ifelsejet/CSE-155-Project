@@ -87,6 +87,7 @@ export default function App() {
           <Stack.Screen name="Pending" options={{ headerShown: false }}>
             {props => <PendingTasks {...props} user={user} />}
           </Stack.Screen>
+    
           </>
           
         ) 
@@ -95,7 +96,6 @@ export default function App() {
           <>
             <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
             <Stack.Screen name="Registration" component={RegistrationScreen} options={{ headerShown: false }}/>
-            <Stack.Screen name="More" component={MoreInfo} options={{ headerShown: false }}/> 
 
           </>
         )}

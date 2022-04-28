@@ -6,6 +6,17 @@ export default StyleSheet.create({
         backgroundColor: "#fff",
         paddingHorizontal: 20,
     },
+    passwordContainer: {
+        flexDirection: 'row',
+        borderWidth: 1.5,
+        borderColor: "#000",
+        marginTop: 20,
+        height: 50,
+        paddingHorizontal: 10,
+        borderRadius: 5,
+        color: "#000",
+      
+    },
     heading: {
         color: "#000",
         fontSize: 36,
@@ -24,9 +35,9 @@ export default StyleSheet.create({
         margin: 30
     },
     input: {
-        borderWidth: 1.5,
-        borderColor: "#000",
-        marginTop: 20,
+        //borderWidth: 1.5,
+       // borderColor: "#000",
+        marginTop: 0,
         height: 50,
         paddingHorizontal: 10,
         borderRadius: 5,
@@ -87,6 +98,24 @@ export default StyleSheet.create({
     footerText: {
         fontSize: 16,
         color: '#2e2e2d'
+    },
+    profile: {
+        height: 25, 
+        width: 25,
+        marginTop: 32,
+        alignContent: 'center',
+        marginRight: 5,
+        marginTop: 10,
+
+    },
+    lock: {
+        height: 25, 
+        width: 25,
+        marginTop: 32,
+        alignContent: 'center',
+        marginRight: 5,
+        marginTop: 10,
+        
     },
     footerLink: {
         color: "#788eec",

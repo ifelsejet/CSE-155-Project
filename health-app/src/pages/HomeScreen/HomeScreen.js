@@ -33,7 +33,7 @@ export default function HomeScreen(props) {
             setUserName(docData["data"]["name"])
         })
     }, []);
-    //console.log(props.user);
+    console.log(props.user.uid);
 
     
     return (

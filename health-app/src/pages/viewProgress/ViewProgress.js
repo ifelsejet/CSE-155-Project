@@ -110,7 +110,7 @@ export default function ViewProgress(props) {
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
 
-        var newdate = month + "/" + day + "/" + year;
+        var newdate = month + "/" + day //+ "/" + year;
         this[index] = newdate;
       }, mergedDates); // use arr as this
 

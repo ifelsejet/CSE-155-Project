@@ -126,10 +126,12 @@ export default function ViewProgress(props) {
       var newdate = month + "/" + day //+ "/" + year;
       mergedDates.push(newdate)
       var projectedVals = [...achievedValues]
+
+      if(projectedVals.length > 1){
       var project = achievedValues.slice(-2)
 
       projectedVals.push(project[1] + (project[1] - project[0]))
-
+      }
       setAchievedData(achievedValues)
       setGoalData(goalValues)
       setCharttDates(mergedDates)

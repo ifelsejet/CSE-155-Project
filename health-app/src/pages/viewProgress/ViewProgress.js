@@ -83,14 +83,14 @@ export default function ViewProgress(props) {
           achievedValues.push(docData["data"][prog_type][day])
         }
         else {
-          achievedValues.push(achievedValues.slice(-1))
+          achievedValues.push(achievedValues.slice(-1)[0])
         }
 
         if (day in docData["Goals"][prog_type]) {
           goalValues.push(docData["Goals"][prog_type][day])
         }
         else {
-          goalValues.push(goalValues.slice(-1))
+          goalValues.push(goalValues.slice(-1)[0])
         }
       })
       mergedDates.forEach(function (part, index) {
@@ -103,20 +103,32 @@ export default function ViewProgress(props) {
       indices.sort((a, b) => mergedDates[a] - mergedDates[b])
 
       mergedDates = indices.map(i => mergedDates[i])
-
+      var lastdate;
       mergedDates.forEach(function (part, index) {
         var dateObj = this[index];
+        lastdate = dateObj
+        lastdate.setUTCDate(lastdate.getUTCDate() + 1);
         var month = dateObj.getUTCMonth() + 1; //months from 1-12
         var day = dateObj.getUTCDate();
         var year = dateObj.getUTCFullYear();
 
-        var newdate = month + "/" + day + "/" + year;
+        var newdate = month + "/" + day //+ "/" + year;
         this[index] = newdate;
       }, mergedDates); // use arr as this
-
       achievedValues = indices.map(i => achievedValues[i])
       goalValues = indices.map(i => goalValues[i])
 
+      goalValues.push(goalValues.slice(-1))
+      var month = lastdate.getUTCMonth() + 1; //months from 1-12
+      var day = lastdate.getUTCDate();
+      var year = lastdate.getUTCFullYear();
+
+      var newdate = month + "/" + day //+ "/" + year;
+      mergedDates.push(newdate)
+      var projectedVals = [...achievedValues]
+      var project = achievedValues.slice(-2)
+
+      projectedVals.push(project[1] + (project[1] - project[0]))
 
       setAchievedData(achievedValues)
       setGoalData(goalValues)
@@ -124,17 +136,22 @@ export default function ViewProgress(props) {
 
       temp_data_for_charts.push({
         labels: mergedDates,
-        datasets: [{
+        datasets: [ {
+          data: projectedVals,
+          strokeWidth: 4,
+          color: (opacity = 1) => `rgba(255, 0, 255, 1)`, // optional
+        },
+        {
           data: achievedValues,
           strokeWidth: 4,
-          color: (opacity = 1) => `rgba(0, 255, 255, 1)` // optional
+          color: (opacity = 1) => `rgba(0, 255, 255, 1)`, // optional
         },
         {
           data: goalValues,
           strokeWidth: 4,
           color: (opacity = 1) => `rgba(183,200,10, 0.75)` // optional
         }],
-        legend: ["Progress", "Goal"]
+        legend: ["Projected", "Progress","Goal"]
       });
     });
     setData_for_charts(temp_data_for_charts)
